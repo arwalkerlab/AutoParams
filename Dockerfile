@@ -5,7 +5,7 @@
 # Parameter Generation: AmberTools - antechamber + prmchk2
 # 2D Structure Drawing: RDKit, OpenBabel
 # Parameter Testing:    AmberTools - tleap
-# Current Version:      2023.03.30
+# Current Version:      2023.04.04
 
 FROM continuumio/miniconda
 
