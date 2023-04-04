@@ -4,6 +4,7 @@
 
 <h1>Job Complete!</h1>
 
+<b>Job ID: </b> {{ session['jobid'] }} <br>
 <b>Input PDB:</b> {{ pdb }}<br>
 <b>Charge: </b> {{ charge }}<br>
 <b>Molecule Type: </b> {{ moltype }} <br>
@@ -15,4 +16,4 @@ Parameters<br>
 
 <br>
 <br>
-<img src= "{{ url_for('static', filename=imagename )}}" align="middle" width="500">
+<img src="{{ url_for('static',filename=imagename) }}" align="middle" width="500">

@@ -41,6 +41,8 @@ class MainJob():
             self.file_list["Original PDB"] = self.file_list["Original PDB"]+".ORIG"
             self._job_logging += "PDB file cleaned\n"
             PDBtoChemDraw(self.file_list["Working PDB"],self.file_list["ChemDraw"])
+
+            S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["ChemDraw"].split("/")[-1]}',shell=True)
             return True
         except:
             self._job_logging += "PDB file cleaning failed.  Unable to use PDB.\n"

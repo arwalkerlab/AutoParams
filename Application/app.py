@@ -52,13 +52,14 @@ def process_files():
 ### Job Finished Page
 @app.route('/finished',methods=['GET', 'POST'])
 def show_finished():
-    pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"]
+    pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"].split("/")[-1]
     charge = CURRENT_JOBS[session["jobid"]]._charge
     moltype = CURRENT_JOBS[session["jobid"]]._restype
     resname = CURRENT_JOBS[session["jobid"]]._resname
     frcmod = CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
     mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
-    imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"]
+    imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"].split("/")[-1]
+    
     return render_template("finished.html",pdb=pdb,
             charge=charge,
             moltype=moltype,

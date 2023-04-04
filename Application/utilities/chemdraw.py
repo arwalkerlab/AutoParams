@@ -2,6 +2,7 @@ import glob
 from rdkit import Chem
 from rdkit.Chem import Draw
 from openbabel import openbabel
+from .defaults import *
 
 def PDBtoSMI(pdb):
     smi_file = pdb.replace(".pdb",".smi")
@@ -11,18 +12,22 @@ def PDBtoSMI(pdb):
         mol = openbabel.OBMol()
         obConversion.ReadFile(mol, pdb)
         obConversion.WriteFile(mol, smi_file)
-    f = open(smi_file)
-    smiles = f.read()
-    f.close()
+    smiles = open(smi_file).read()
     return smiles.split()[0]
+
+def CanonicalSmiles(pdb):
+    smiles = PDBtoSMI(pdb)
+    return Chem.MolToSmiles(Chem.MolFromSmiles(smiles))
 
 def Generate2DImage(smiles,image):
     Draw.MolToFile(Chem.MolFromSmiles(smiles), image, size=(1268,720))
-    return
+    return 
 
 def PDBtoChemDraw(pdb,output):
     try:
         Generate2DImage(PDBtoSMI(pdb), output)
+        with open(SMILES_DB,"a") as f:
+            f.write(CanonicalSmiles(pdb)+"\n")
     except:
         pass
-    return
+    return CanonicalSmiles(pdb)
