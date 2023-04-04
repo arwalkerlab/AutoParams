@@ -20,7 +20,7 @@ DOCKER_RUN_FLAGS=""
 # Build the image from the Dockerfile
 docker build --tag $IMAGENAME . 
 
-docker run -it $IMAGENAME
+docker run -it --mount src='./Database',target=/app/database,type=bind $IMAGENAME
 # Run the image in a container using the variables above.
 # docker run --name $CONTAINERNAME $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
 

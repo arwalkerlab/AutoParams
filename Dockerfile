@@ -36,9 +36,9 @@ COPY Application/ /app/
 # Make RUN commands use the new environment:
 # SHELL ["conda", "run", "-n", "psi4flask", "/bin/bash", "-c"]
 
-COPY testpsi4.py .
-COPY test.pdb .
-ENTRYPOINT [ "conda", "run", "-n", "psi4flask", "python", "-u", "testpsi4.py"]
+#COPY testpsi4.py .
+#COPY test.pdb .
+# ENTRYPOINT [ "conda", "run", "-n", "psi4flask", "python", "-u", "testpsi4.py"]
 # ENTRYPOINT [ "conda", "run", "-n", "psi4flask", "/bin/bash", "startapp.sh"]
 # WORKDIR /app/
 # ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0"]
