@@ -60,13 +60,7 @@ def show_finished():
     mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
     imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"].split("/")[-1]
     
-    return render_template("finished.html",pdb=pdb,
-            charge=charge,
-            moltype=moltype,
-            resid=resname,
-            frcmod = frcmod,
-            mol2 = mol2,
-            imagename=imagefile)
+    return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] )
 
 ### Get Download Link
 @app.route('/upload/<path:filename>', methods=['GET', 'POST'])

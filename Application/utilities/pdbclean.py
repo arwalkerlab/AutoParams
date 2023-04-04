@@ -36,3 +36,10 @@ def SingleResidue(pdbfile):
             if "ATOM" in line:
                 f.write(line)
         f.write("TER\nEND\n")
+
+def GetResName(pdb):
+    for line in open(pdb,"r").readlines():
+        if "ATOM" in line:
+            return line[17:20].strip()
+
+        

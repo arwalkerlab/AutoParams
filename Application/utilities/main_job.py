@@ -2,8 +2,8 @@ from .defaults import *
 from .utilities import *
 from .pdbclean import *
 from .optimize import *
-from .chemdraw import PDBtoChemDraw
-
+from .chemdraw import *
+from .. import pdbutilities as pdbutil
 class MainJob():
     def __init__(self,jobid):
         ### Internal variables.
@@ -17,7 +17,7 @@ class MainJob():
         self._restype = "DNA"
         self._resname = "UNK"
         self._job_logging = ""
-
+        self._canon_smiles = ""
         ### Initialization Functions
         os.makedirs(self._job_folder,exist_ok=True)
 
@@ -34,14 +34,14 @@ class MainJob():
         self._job_logging += "PDB file uploaded\n"
 
     def CheckPDBQuality(self):
+        self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
         SingleResidue(self.file_list["Original PDB"])
+        self._resname = pdbutil.GetResName(self.file_list["Original PDB"])
         try:
             tmp = parmed.load_file(self.file_list["Original PDB"])
             self.file_list["Working PDB"] = self.file_list["Original PDB"]
             self.file_list["Original PDB"] = self.file_list["Original PDB"]+".ORIG"
             self._job_logging += "PDB file cleaned\n"
-            PDBtoChemDraw(self.file_list["Working PDB"],self.file_list["ChemDraw"])
-
             S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["ChemDraw"].split("/")[-1]}',shell=True)
             return True
         except:
