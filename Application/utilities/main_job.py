@@ -2,7 +2,7 @@ from .defaults import *
 from .utilities import *
 from .pdbclean import *
 from .optimize import *
-
+from .chemdraw import PDBtoChemDraw
 
 class MainJob():
     def __init__(self,jobid):
@@ -40,6 +40,7 @@ class MainJob():
             self.file_list["Working PDB"] = self.file_list["Original PDB"]
             self.file_list["Original PDB"] = self.file_list["Original PDB"]+".ORIG"
             self._job_logging += "PDB file cleaned\n"
+            PDBtoChemDraw(self.file_list["Working PDB"],self.file_list["ChemDraw"])
             return True
         except:
             self._job_logging += "PDB file cleaning failed.  Unable to use PDB.\n"

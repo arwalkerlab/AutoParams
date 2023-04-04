@@ -52,7 +52,20 @@ def process_files():
 ### Job Finished Page
 @app.route('/finished',methods=['GET', 'POST'])
 def show_finished():
-    return render_template("finished.html")
+    pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"]
+    charge = CURRENT_JOBS[session["jobid"]]._charge
+    moltype = CURRENT_JOBS[session["jobid"]]._restype
+    resname = CURRENT_JOBS[session["jobid"]]._resname
+    frcmod = CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
+    mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
+    imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"]
+    return render_template("finished.html",pdb=pdb,
+            charge=charge,
+            moltype=moltype,
+            resid=resname,
+            frcmod = frcmod,
+            mol2 = mol2,
+            imagename=imagefile)
 
 ### Get Download Link
 @app.route('/upload/<path:filename>', methods=['GET', 'POST'])
