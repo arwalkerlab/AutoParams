@@ -1,8 +1,9 @@
 import psi4
 import parmed as pm
+from .defaults import *
 
 def OptimizePDB(pdbfile,charge=0,mult=1,method="scf/6-31g**"):
-    psi4.set_memory('2048 MB')
+    psi4.set_memory(AVAILABLE_PSI4_MEMORY)
     xyzdata = f"{charge} {mult}"
     mol = pm.load_file(pdbfile)
     mol.write_pdb(pdbfile+".ORIG")

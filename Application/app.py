@@ -9,11 +9,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DATABASE_FOLDER'] = DATABASE_DIR
 main_start_dir = os.getcwd()
 MAIN_UPLOAD_FOLDER = os.path.join(main_start_dir,"uploads/")
-
-## Generate Database HTML page here
-with open("templates/__db_dataset.html","w") as f:
-    files = glob.glob("database/*/")
-    f.write("<br>".join([x for x in files]))
+RefreshDB()
 
 ### Starting Page
 @app.route('/',methods=['GET', 'POST'])
@@ -31,7 +27,7 @@ def start_page():
             CURRENT_JOBS[jobid]._opt_complete = True
         print("Current optimization boolean: ",CURRENT_JOBS[jobid]._opt_complete)
         CURRENT_JOBS[jobid].UploadPDBFile(request.files['PDBfile'])
-        return render_template("jobqueue.html")
+        return render_template("jobqueue.html",curr_job=CURRENT_JOBS[jobid])
     ###  make a folder in 'uploads/' using that job-identifier.
     ###  render_template('loading.html')
     return render_template("upload_page.html")
@@ -87,6 +83,7 @@ def db_download(filename):
 ### Database Page
 @app.route('/database',methods=["GET","POST"])
 def database():
+    RefreshDB()
     return render_template("database.html")
 
 # @app.route('/',methods=['GET', 'POST'])
