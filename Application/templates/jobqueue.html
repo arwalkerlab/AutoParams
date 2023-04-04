@@ -1,0 +1,19 @@
+<!-- This page should render as a jobqueue holding all active jobs for the user's session and their status. -->
+<!doctype html>
+<script>
+    function navigate() {
+        window.location.href = 'finished';  // Redirects user to the /map route when 'process_files' is finished
+    }
+    fetch('process_files').then(navigate); // Performing 'process_files' and then calls navigate() function, declared above
+</script>
+
+
+<title>WalkerLabs Automated Parameter Builder</title>
+{% include '__main_page_style.html' %}
+
+<p style="text-align:center;">
+    <img src="{{url_for('static',filename='WalkerResearchPeptideLogo.png')}}" style="width: 75%;" >
+</p>
+<h1 style="text-align: center;">Running Parameter Builder Jobs</h1>
+
+    

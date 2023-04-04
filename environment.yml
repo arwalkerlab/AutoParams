@@ -1,0 +1,15 @@
+name: psi4flask
+channels:
+  - conda-forge
+  - psi4
+dependencies:
+  - python=3.8
+  - psi4
+  - numpy
+  - rdkit
+  - openbabel
+  - flask
+  - psiresp-base
+  - werkzeug
+  - ambertools
+  - parmed

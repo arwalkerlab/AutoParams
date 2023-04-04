@@ -1,0 +1,75 @@
+
+Host: Mechanar
+
+Timers On : Mon Apr  3 21:49:58 2023
+Timers Off: Mon Apr  3 21:49:59 2023
+
+Wall Time:        0.24 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: Mechanar
+
+Timers On : Mon Apr  3 21:50:58 2023
+Timers Off: Mon Apr  3 21:50:58 2023
+
+Wall Time:        0.24 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: Mechanar
+
+Timers On : Mon Apr  3 21:52:04 2023
+Timers Off: Mon Apr  3 21:52:04 2023
+
+Wall Time:        0.24 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: Mechanar
+
+Timers On : Mon Apr  3 21:52:23 2023
+Timers Off: Mon Apr  3 21:52:24 2023
+
+Wall Time:        0.24 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: Mechanar
+
+Timers On : Mon Apr  3 21:53:30 2023
+Timers Off: Mon Apr  3 21:53:34 2023
+
+Wall Time:        3.99 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+DFH: sparsity prep                  :      1.767u      0.017s      1.068w      1 calls
+Libint2ERI::Libint2ERI              :      3.300u      0.017s      1.987w      3 calls
+
+--------------------------------------------------------------------------------------
+DFH: sparsity prep                  :      1.767u      0.017s      1.068w      1 calls
+| Libint2ERI::Libint2ERI            :      1.117u      0.017s      0.672w      1 calls
+Libint2ERI::Libint2ERI              :      2.183u      0.000s      1.314w      2 calls
+
+**************************************************************************************

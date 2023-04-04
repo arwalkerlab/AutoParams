@@ -1,0 +1,79 @@
+<!doctype html>
+<title>WalkerLabs Automated Parameter Builder</title>
+{% include '__main_page_style.html' %}
+
+<!-- Walker Research Peptide Logo -->
+<div style="text-align: center;">
+  <img src="{{url_for('static',filename='WalkerResearchPeptideLogo.png')}}" 
+  alt="Walker Research Peptide Logo" 
+  class="center" 
+  width="50%"> 
+</div>
+  
+<h1 style="text-align: center;">WalkerLabs Automated Parameter Builder</h1>
+
+<p style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
+  <span style="
+    display:inline-block;
+    white-space: wrap;
+    overflow-wrap: break-word;
+    max-width: 70ch;">
+  This online tool is designed to generate custom parameters for nonstandard molecules to be used in classical molecular dynamics simulations.
+  </span>
+</p>
+
+<form method=post enctype=multipart/form-data>
+<fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
+<legend>PDB Structure Information</legend>
+  <!-- label for="var1" is the same as input id="var1", and flask's request.files['var2'] is input name='var2' -->
+    <div style="padding: 1em;">
+    <label for="PDBid">Select PDB to parametrize: </label>
+    <input type="file" id="PDBid" name="PDBfile" accept=".pdb" required>
+    </div>
+    <!-- <br> -->
+    <div style="padding: 1em;">
+      <label for="charge">Charge (integer)</label>
+    <input type="number" id="charge" name="charge" value=0 required size="10">
+    </div>
+    <!-- <br> -->
+    <div style="padding: 1em;">
+      <legend>Molecule Type:</legend>
+    <div>
+      <input type="radio" id="RNA" name="moltype" value="RNA"
+              checked>
+      <label for="RNA">RNA</label>
+    </div>
+    <div>
+      <input type="radio" id="DNA" name="moltype" value="DNA">
+      <label for="DNA">DNA</label>
+    </div>
+    <div>
+      <input type="radio" id="Protein" name="moltype" value="Protein">
+      <label for="Protein">Protein</label>
+    </div>
+    <div>
+      <input type="radio" id="Carbohydrate" name="moltype" value="Carbohydrate">
+      <label for="Carbohydrate">Carbohydrate</label>
+    </div>
+  </div>
+  <!-- <br> -->
+  <div style="padding: 1em;">
+    <label for="resid">PDB ResID (max 3 characters):</label>
+    <input type="text" id="resid" name="resid" value="UNK" required minlength="1" maxlength="3" size="10">
+  </div>
+  
+</fieldset>
+<fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
+  <legend>Calculation Options</legend>
+  <input type="checkbox" id="OptFirst" name="optimize_job">
+  <label for="OptFirst">Optimize Structure before generating parameters? (This will require more time to complete.)</label>
+</fieldset>
+<input type="submit" value="Generate Parameters">
+</form>
+
+<!-- <title>Hello from Flask</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Hello, World!</h1>
+{% endif %} -->

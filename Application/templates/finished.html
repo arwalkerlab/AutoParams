@@ -1,0 +1,18 @@
+<!doctype html>
+<title>Job Complete!</title>
+{% include '__main_page_style.html' %}
+
+<h1>Job Complete!</h1>
+
+<b>Input PDB:</b> {{ pdb }}<br>
+<b>Charge: </b> {{ charge }}<br>
+<b>Molecule Type: </b> {{ moltype }} <br>
+<b>Residue Name: </b> {{ resid }}<br>
+
+Parameters<br>
+<a href="{{ url_for('download', filename=frcmod) }}">frcmod File</a><br>
+<a href="{{ url_for('download', filename=mol2) }}">mol2 File</a><br>
+
+<br>
+<br>
+<img src= "{{ url_for('static', filename=imagename )}}" align="middle" width="500">
