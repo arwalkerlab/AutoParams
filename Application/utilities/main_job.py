@@ -3,7 +3,7 @@ from .utilities import *
 from .pdbclean import *
 from .optimize import *
 from .chemdraw import *
-from .. import pdbutilities as pdbutil
+
 class MainJob():
     def __init__(self,jobid):
         ### Internal variables.
@@ -16,10 +16,17 @@ class MainJob():
         self._charge = 0
         self._restype = "DNA"
         self._resname = "UNK"
-        self._job_logging = ""
         self._canon_smiles = ""
+        self._multiplicity = 1
+        
         ### Initialization Functions
         os.makedirs(self._job_folder,exist_ok=True)
+        self.file_list["JobLog"] = os.path.join(self._job_folder, f"{self._job_id}.html")
+
+    def LogJobMessage(self,message):
+        with open(self.file_list["JobLog"],"a") as f:
+            f.write(message)
+            f.write("\n<br>\n")
 
     def UploadPDBFile(self,pdbfile):
         filename = secure_filename(pdbfile.filename)
@@ -31,40 +38,48 @@ class MainJob():
         self.file_list["PRMTOP"] = self.file_list["Original PDB"].replace(".pdb",".prmtop")
         self.file_list["inpcrd"] = self.file_list["Original PDB"].replace(".pdb",".inpcrd")
         self.file_list["ChemDraw"] = self.file_list["Original PDB"].replace(".pdb",".png")
-        self._job_logging += "PDB file uploaded\n"
+        self.file_list["Working PDB"] = self.file_list["Original PDB"]
+        self.LogJobMessage("PDB file uploaded")
 
     def CheckPDBQuality(self):
         self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
-        SingleResidue(self.file_list["Original PDB"])
-        self._resname = pdbutil.GetResName(self.file_list["Original PDB"])
+        self.LogJobMessage("ChemDraw figure generated")
+        S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["ChemDraw"].split("/")[-1]}',shell=True)
+        self.LogJobMessage("Copying ChemDraw figure to output.")
+        SingleResidue(self.file_list["Working PDB"])
+        self.file_list["Original PDB"] = self.file_list["Original PDB"]+".ORIG"
+        self.LogJobMessage("PDB file checked for single molecule/residue.")
+        self._resname = GetResName(self.file_list["Working PDB"])
+        self.LogJobMessage(f"PDB residue name found: {self._resname}")
         try:
-            tmp = parmed.load_file(self.file_list["Original PDB"])
-            self.file_list["Working PDB"] = self.file_list["Original PDB"]
-            self.file_list["Original PDB"] = self.file_list["Original PDB"]+".ORIG"
-            self._job_logging += "PDB file cleaned\n"
-            S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["ChemDraw"].split("/")[-1]}',shell=True)
+            self.LogJobMessage("Loading PDB into parmed")
+            tmp = parmed.load_file(self.file_list["Working PDB"])
+            self.LogJobMessage("PDB file cleaned")        
             return True
         except:
-            self._job_logging += "PDB file cleaning failed.  Unable to use PDB.\n"
+            self.LogJobMessage("PDB file cleaning failed.  Unable to use PDB.")
             return False
         
     def Optimize(self):
-        # make backup copy of original pdb to ORIG_{pdbfilename}
         if not self._opt_complete:
-            TCOpt(self._job_folder,self.file_list["Working PDB"],self._charge)
-            OptimToMainPDB(self.file_list["Working PDB"])
-            self._job_logging += "PDB optimized.\n"
+            OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity)
+            self.LogJobMessage("PDB optimized")
         else:
-            print("Skipping Optimization.")
+            self.LogJobMessage("PDB optimization skipped.")
+        return True
 
     def RESPCharges(self):
-        print("In RESPCharges()")
+        self.LogJobMessage("In RESPCharges()")
+        return True
 
     def Parametrize(self):
-        print("In Parametrize()")
-
+        self.LogJobMessage("In Parametrize()")
+        return True
+    
     def TestParams(self):
-        print("In TestParams()")
-
+        self.LogJobMessage("In TestParams()")
+        return True
+    
     def AddResultsToDB(self):
-        print("In AddResultsToDB()")
+        self.LogJobMessage("In AddResultsToDB()")
+        return True

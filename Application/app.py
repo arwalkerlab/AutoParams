@@ -5,9 +5,15 @@ from utilities.main_job import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "01123581321_Dockerized"
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['DATABASE_FOLDER'] = DATABASE_DIR
 main_start_dir = os.getcwd()
 MAIN_UPLOAD_FOLDER = os.path.join(main_start_dir,"uploads/")
+
+## Generate Database HTML page here
+with open("templates/__db_dataset.html","w") as f:
+    files = glob.glob("database/*/")
+    f.write("<br>".join([x for x in files]))
 
 ### Starting Page
 @app.route('/',methods=['GET', 'POST'])
@@ -16,10 +22,14 @@ def start_page():
         jobid = random_job_identifier()
         session["jobid"] = jobid
         CURRENT_JOBS[jobid] = MainJob(jobid)
-        if bool(request.form.get('optimize_job')):
+        CURRENT_JOBS[jobid]._charge = request.form.get('charge')
+        CURRENT_JOBS[jobid]._multiplicity = request.form.get('spin')
+        CURRENT_JOBS[jobid]._restype = request.form.get('moltype')
+        if request.form.get('optimize_job') == "on":
             CURRENT_JOBS[jobid]._opt_complete = False
         else:
             CURRENT_JOBS[jobid]._opt_complete = True
+        print("Current optimization boolean: ",CURRENT_JOBS[jobid]._opt_complete)
         CURRENT_JOBS[jobid].UploadPDBFile(request.files['PDBfile'])
         return render_template("jobqueue.html")
     ###  make a folder in 'uploads/' using that job-identifier.
@@ -52,6 +62,9 @@ def process_files():
 ### Job Finished Page
 @app.route('/finished',methods=['GET', 'POST'])
 def show_finished():
+    orig_logfile = CURRENT_JOBS[session["jobid"]].file_list["JobLog"]
+    new_logfile = f"logfiles/{session['jobid']}.html"
+    S.call(f"cp {orig_logfile} templates/{new_logfile}",shell=True)
     pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"].split("/")[-1]
     charge = CURRENT_JOBS[session["jobid"]]._charge
     moltype = CURRENT_JOBS[session["jobid"]]._restype
@@ -60,12 +73,16 @@ def show_finished():
     mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
     imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"].split("/")[-1]
     
-    return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] )
+    return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] ,logfile=new_logfile)
 
 ### Get Download Link
 @app.route('/upload/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+
+@app.route('/database/<path:filename>', methods=['GET', 'POST'])
+def db_download(filename):
+    return send_from_directory(app.config['DATABASE_FOLDER'], filename, as_attachment=True)
 
 ### Database Page
 @app.route('/database',methods=["GET","POST"])

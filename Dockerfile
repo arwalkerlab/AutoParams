@@ -22,5 +22,7 @@ COPY Application/ /app/
 WORKDIR /app/
 
 # On container initialization, run the flask app, exposed
-ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0","--port=5005"]
+# ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0","--port=5005"]
 
+RUN echo "conda activate psi4flask" >> /root/.bashrc
+RUN echo "flask run --host=0.0.0.0 --port=5005" >> /root/.bashrc

@@ -15,7 +15,8 @@ DOCKER_PORT_MAPPING="-p $HOST_PORT:$DOCKER_PORT"
 # External Directory mounted inside Container
 # Allows read/write to external database to prevent loss at container termination.
 HOST_MOUNT_DIR='./Database'
-DOCKER_MNT_DIR=/app/uploads #/app/database
+# DOCKER_MNT_DIR=/app/uploads 
+DOCKER_MNT_DIR=/app/database
 DOCKER_MOUNT_COMMAND="--mount src=$HOST_MOUNT_DIR,target=$DOCKER_MNT_DIR,type=bind"
 
 # Restart container if it experiences a failure (useful for error handling)
@@ -28,10 +29,10 @@ docker build --tag $IMAGENAME .
 
 
 ###### Interactive Container ######
-# docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
+docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
 
 ###### Stand-alone Container ######
-docker run --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
+# docker run --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
 
 #### Cleanup on container exit ####
 # Purge the container
