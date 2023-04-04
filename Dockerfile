@@ -40,8 +40,8 @@ COPY Application/ /app/
 #COPY test.pdb .
 # ENTRYPOINT [ "conda", "run", "-n", "psi4flask", "python", "-u", "testpsi4.py"]
 # ENTRYPOINT [ "conda", "run", "-n", "psi4flask", "/bin/bash", "startapp.sh"]
-# WORKDIR /app/
-# ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0"]
+WORKDIR /app/
+ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0","--port=5005"]
 # CMD [ "sh", "./startapp.sh" ]
 # FROM alpine:latest
 # FROM conda/miniconda3
