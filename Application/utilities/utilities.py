@@ -70,3 +70,7 @@ def CheckSMILESinDB(SMILES):
     if SMILES in lines:
         return True
     return False
+
+def MaybeCopy(source,dest):
+    if G(source):
+        S.call(f"cp {source} {dest}",shell=True)
