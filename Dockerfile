@@ -10,6 +10,8 @@
 FROM continuumio/miniconda
 
 # Installation of necessary python packages for the Psi4/AmberTools Flask Application
+# uncomment ARG CACHEBUST=1 if the environment.yml file has been modified.
+ARG CACHEBUST=1
 COPY environment.yml .
 RUN conda env create -f environment.yml
 RUN conda install -y -c psi4 libecpint --name psi4flask
@@ -17,6 +19,8 @@ RUN conda install -y -c psi4 libecpint --name psi4flask
 # Copy Flask Application data into /app/ folder. Included CACHEBUST to force rebuild.
 ARG CACHEBUST=1
 COPY Application/ /app/
+COPY PsiRESPJob.py /bin/PsiRESPJob
+RUN chmod +x /bin/PsiRESPJob
 
 # Move into /app/ where Flask Application is now located.
 WORKDIR /app/

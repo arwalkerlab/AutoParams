@@ -3,6 +3,8 @@ from .utilities import *
 from .pdbclean import *
 from .optimize import *
 from .chemdraw import *
+from .respfitting import *
+
 
 class MainJob():
     def __init__(self,jobid):
@@ -19,6 +21,7 @@ class MainJob():
         self._resname = "UNK"
         self._canon_smiles = ""
         self._multiplicity = 1
+        self._resp_charges = []
         
         ### Initialization Functions
         os.makedirs(self._job_folder,exist_ok=True)
@@ -75,6 +78,10 @@ class MainJob():
 
     def RESPCharges(self):
         self.LogJobMessage("In RESPCharges()")
+        self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder)
+        if not self._resp_charges:
+            return False
+        print(self._resp_charges)
         return True
 
     def Parametrize(self):

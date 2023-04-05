@@ -19,7 +19,6 @@ def RefreshDB():
     os.chdir(DATABASE_DIR)
     with open(TEMPLATES_DIR+"__db_dataset.html","w") as f:
         for file_loc in G("*/"):
-            print(file_loc)
             f.write(DataBaseEntry(file_loc))
     os.chdir(MAIN_DIR)
 
