@@ -4,13 +4,14 @@ from .pdbclean import *
 from .optimize import *
 from .chemdraw import *
 from .respfitting import *
-
+from .parametrize import *
 
 class MainJob():
     def __init__(self,jobid):
         ### Internal variables.
         self._job_id = jobid
         self._job_folder = UPLOAD_FOLDER + str(self._job_id)+ "/"
+        self._params_dir = self._job_folder+"Params/"
         self._DB_folder = DATABASE_DIR + str(self._job_id)+ "/"
         self.file_list = {}
         self._opt_complete = False
@@ -86,7 +87,16 @@ class MainJob():
 
     def Parametrize(self):
         self.LogJobMessage("In Parametrize()")
-        return True
+        os.makedirs(self._params_dir,exist_ok=True)
+        S.call(f"cp {self.file_list['Working PDB']} {self._params_dir}/param.pdb",shell=True)
+        os.chdir(self._params_dir)
+
+        GenerateParameters(self.file_list,self._resp_charges,self._restype)
+
+        os.chdir(MAIN_DIR)
+        if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
+            return True
+        return False
     
     def TestParams(self):
         self.LogJobMessage("In TestParams()")
