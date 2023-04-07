@@ -2,6 +2,12 @@ import parmed
 
 class Atom():
     def __init__(self):
+        self.x = None
+        self.y = None
+        self.z = None
+        self.resp_charge = None
+        self.atom_name = None
+        self.atom_type = None
         pass
     def set_position(self,x,y,z):
         self.x = x
