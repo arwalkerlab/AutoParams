@@ -1,27 +1,35 @@
 <!doctype html>
 <title>Job Complete!</title>
 {% include '__main_page_style.html' %}
-
 <h1>Job Complete!</h1>
+
+<!-- Job Information Block -->
 <fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
-<b>Job ID: </b> {{ session['jobid'] }} <br>
-<b>Input PDB:</b> {{ curr_job.file_list["Working PDB"].split("/")[-1] }}<br>
-<b>Charge: </b> {{ curr_job._charge }}<br>
-<b>Molecule Type: </b> {{ curr_job._restype }} <br>
-<b>Residue Name: </b> {{ curr_job._resname }}<br>
-<b>Canonical SMILES: </b> {{ curr_job._canon_smiles }}
+    <legend>Job Information</legend>
+    <b>Job ID: </b> {{ session['jobid'] }} <br>
+    <b>Input PDB:</b> {{ curr_job.file_list["Working PDB"].split("/")[-1] }}<br>
+    <b>Charge: </b> {{ curr_job._charge }}<br>
+    <b>Molecule Type: </b> {{ curr_job._restype }} <br>
+    <b>Residue Name: </b> {{ curr_job._resname }}<br>
+    <b>Canonical SMILES: </b> {{ curr_job._canon_smiles }}
+</fieldset>                
+<br>
+
+<!-- File Download Block -->
+<fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
+    <legend>Parameter Files</legend>
+    <a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">frcmod File</a><br>
+    <a href="{{ url_for('download', filename=curr_job.file_list['MOL2']) }}">mol2 File</a><br>
 </fieldset>
 <br>
-<fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
-    <legend>Parameters</legend>
-<a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">frcmod File</a><br>
-<a href="{{ url_for('download', filename=curr_job.file_list['MOL2']) }}">mol2 File</a><br>
-</fieldset>
+
+<!-- JMol Object Block -->
+<script type="text/javascript" src="http://chemapps.stolaf.edu/jmol/jmol.php?model={{ curr_job._canon_smiles }}&inline&width=400&height=400&align=middle"></script>
 <br>
-<img src="{{ url_for('static',filename=curr_job.file_list['static_temp_png']) }}" width="500">
-<br>
-<br>
+
+<!-- Job Log Block -->
 <fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
     <legend>Job Log Output</legend>
     {% include logfile %}
 </fieldset>
+<br>

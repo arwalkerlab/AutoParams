@@ -17,9 +17,7 @@ def RunJob(pdbfile,charge,mult,workdir):
     psi_molecule.add_conformer(qcmol=qc_molecule)
     psi_job = psiresp.Job(molecules=[psi_molecule],working_directory=workdir)
     psi_job.run() ## MUST HAVE BOTH INSTANCES OF psi_job.run() TO FUNCTION CORRECTLY.
-    print("Finished psi_run.job()")
     respcharges = psi_job.run()
-    print(respcharges[0])
     with open("resp.out","w") as f:
         for ch in respcharges[0]:
             f.write(f"{ch}\n")

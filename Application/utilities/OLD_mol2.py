@@ -22,7 +22,7 @@ def writeMol2(charges, filename):
             w.write(line.replace("DU","NB"))
         for line, charge in zip(lines[start:end],charges):
             oldCharge = line.split()[8]
-            w.write(line.replace(oldCharge,charge).replace("DU","NB"))
+            w.write(line.replace(oldCharge,f"{float(charge):>9.06f}").replace("DU","NB"))
         for line in lines[end:]:
             w.write(line.replace("DU","NB"))
     S.call(f"mv temp.txt {filename}",shell=True)

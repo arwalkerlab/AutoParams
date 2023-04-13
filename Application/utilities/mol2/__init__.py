@@ -1,6 +1,7 @@
 from .ParameterUtilities import *
 from .AtomTyper import *
 from .classes import *
+from ..pdbclean import GetResName
 import parmed
 
 

@@ -29,11 +29,13 @@ class MainJob():
         
         self.file_list["JobLog"] = os.path.join(self._job_folder, f"{self._job_id}.html")
         self.file_list["static_temp_png"] = f"{self._job_id}.png"
+        self.LogJobMessage("<hr>")
 
     def LogJobMessage(self,message):
         with open(self.file_list["JobLog"],"a") as f:
             f.write(message)
-            f.write("\n<br>\n")
+            if message != "<hr>":
+                f.write("\n<br>\n")
 
     def UploadPDBFile(self,pdbfile):
         filename = secure_filename(pdbfile.filename)
@@ -47,11 +49,13 @@ class MainJob():
         self.file_list["ChemDraw"] = self.file_list["Original PDB"].replace(".pdb",".png")
         self.file_list["Working PDB"] = self.file_list["Original PDB"]
         self.file_list["SMILES"] = self.file_list["Original PDB"].replace(".pdb",".png").replace(".pdb",".smi")
+        self.file_list["LeapLog"] = os.path.join(self._job_folder, "leap.log")
         self.LogJobMessage("PDB file uploaded")
         self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
         self.LogJobMessage("ChemDraw figure generated")
         S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["static_temp_png"]}',shell=True)
         self.LogJobMessage("Copying ChemDraw figure to output.")
+        self.LogJobMessage("<hr>")
 
 
     def CheckPDBQuality(self):
@@ -64,38 +68,47 @@ class MainJob():
             self.LogJobMessage("Loading PDB into parmed")
             tmp = parmed.load_file(self.file_list["Working PDB"])
             self.LogJobMessage("PDB file cleaned")        
+            self.LogJobMessage("<hr>")
             return True
         except:
             self.LogJobMessage("PDB file cleaning failed.  Unable to use PDB.")
+            self.LogJobMessage("<hr>")
             return False
         
     def Optimize(self):
         if not self._opt_complete:
             OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity)
             self.LogJobMessage("PDB optimized")
+            self.LogJobMessage("<hr>")
         else:
             self.LogJobMessage("PDB optimization skipped.")
+            self.LogJobMessage("<hr>")
         return True
 
     def RESPCharges(self):
-        self.LogJobMessage("In RESPCharges()")
+        self.LogJobMessage("Generating RESP Charges using PsiRESP.")
         self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder)
         if not self._resp_charges:
+            self.LogJobMessage("Unable to generate RESP charges.")
+            self.LogJobMessage("<hr>")
             return False
-        print(self._resp_charges)
+        self.LogJobMessage("RESP charges successfully generated.")
+        self.LogJobMessage("<hr>")
         return True
 
     def Parametrize(self):
-        self.LogJobMessage("In Parametrize()")
+        self.LogJobMessage("Generating custom parameters.")
         os.makedirs(self._params_dir,exist_ok=True)
         S.call(f"cp {self.file_list['Working PDB']} {self._params_dir}/param.pdb",shell=True)
         os.chdir(self._params_dir)
 
-        GenerateParameters(self.file_list,self._resp_charges,self._restype)
+        GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname)
 
         os.chdir(MAIN_DIR)
         if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
+            self.LogJobMessage("Custom parameters generated.  FRCMOD and MOL2 files complete.")
             return True
+        self.LogJobMessage("Parameter generation failure.")
         return False
     
     def TestParams(self):
@@ -114,4 +127,6 @@ class MainJob():
         MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         S.call(f"echo '{self._canon_smiles}' >> {self._DB_folder}{self._job_id[:10]}.smi",shell=True)
         RefreshDB()
+        self.file_list['FRCMOD'] = self.file_list['FRCMOD'].replace(UPLOAD_FOLDER,"")
+        self.file_list['MOL2'] = self.file_list['MOL2'].replace(UPLOAD_FOLDER,"")
         return True

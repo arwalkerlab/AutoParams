@@ -74,7 +74,10 @@ def show_finished():
 ### Get Download Link
 @app.route('/upload/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
+    # directory = os.path.dirname(filename)
+    # file_object = os.path.basename(filename)
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+    # return send_file(filename, as_attachment=True)
 
 @app.route('/database/<path:filename>', methods=['GET', 'POST'])
 def db_download(filename):
