@@ -1,8 +1,7 @@
-from .future_mol2 import *
+# from .future_mol2 import *
+from .mol2 import *
 from .frcmod import *
 from .utilities import *
-# from .OLD_frcmod import HybridizeParams
-from .OLD_mol2 import *
 
 leaprc_dict = {"DNA":"source leaprc.DNA.OL15\n",
                "RNA":"source leaprc.RNA.OL3\n",

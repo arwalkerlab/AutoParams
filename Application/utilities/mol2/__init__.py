@@ -1,4 +1,4 @@
-from .utilities import *
+from ..utilities import *
 
 def GenerateMol2File(pdbfile,mol2file):
     S.call(f"antechamber -i {pdbfile} -fi pdb -at amber -o {mol2file} -fo mol2 -pf y 1> antechamber.log 2> antechamber.err",shell=True)
