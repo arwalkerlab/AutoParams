@@ -5,6 +5,8 @@ from .optimize import *
 from .chemdraw import *
 from .respfitting import *
 from .parametrize import *
+from .testing import *
+
 
 class MainJob():
     def __init__(self,jobid):
@@ -106,14 +108,27 @@ class MainJob():
 
         os.chdir(MAIN_DIR)
         if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
-            self.LogJobMessage("Custom parameters generated.  FRCMOD and MOL2 files complete.")
+            self.LogJobMessage("Custom FRCMOD and MOL2 files generated.")
             return True
         self.LogJobMessage("Parameter generation failure.")
         return False
     
     def TestParams(self):
-        self.LogJobMessage("In TestParams()")
-        return True
+        self.LogJobMessage("Testing parameters for generation of MD inputs.")
+        curr_miss_params = GetMissingParams(self._restype,
+                            self._resname,
+                            self.file_list["MOL2"],
+                            self.file_list["LeapLog"],
+                            frcmod = self.file_list["FRCMOD"],
+                            prmtop=self.file_list["PRMTOP"],
+                            inpcrd=self.file_list["INPCRD"],
+                            pdb=self.file_list["Working PDB"])
+        if not curr_miss_params:
+            self.LogJobMessage("PRMTOP and INPCRD files successfully generated.")
+            return True
+        print(curr_miss_params)
+        self.LogJobMessage("Unable to generate PRMTOP and INPCRD files.")
+        return False
     
     def AddResultsToDB(self):
         self.LogJobMessage("In AddResultsToDB()")

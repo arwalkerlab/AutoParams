@@ -1,5 +1,0 @@
-need:  
-
-1. Function using Psi4 to optimize a PDB structure with a given charge, which will return the new coordinates to the existing PDB filename.
-2. Function using PsiRESP to generate RESP charges for a PDB structure with a given charge, then put the values in order in a text file to be read in by other functions.
-

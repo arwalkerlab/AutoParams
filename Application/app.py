@@ -61,13 +61,13 @@ def show_finished():
     orig_logfile = CURRENT_JOBS[session["jobid"]].file_list["JobLog"]
     new_logfile = f"logfiles/{session['jobid']}.html"
     S.call(f"cp {orig_logfile} templates/{new_logfile}",shell=True)
-    pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"].split("/")[-1]
-    charge = CURRENT_JOBS[session["jobid"]]._charge
-    moltype = CURRENT_JOBS[session["jobid"]]._restype
-    resname = CURRENT_JOBS[session["jobid"]]._resname
-    frcmod = CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
-    mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
-    imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"].split("/")[-1]
+    # pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"].split("/")[-1]
+    # charge = CURRENT_JOBS[session["jobid"]]._charge
+    # moltype = CURRENT_JOBS[session["jobid"]]._restype
+    # resname = CURRENT_JOBS[session["jobid"]]._resname
+    # frcmod = CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
+    # mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
+    # imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"].split("/")[-1]
     
     return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] ,logfile=new_logfile)
 

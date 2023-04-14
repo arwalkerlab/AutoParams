@@ -21,3 +21,8 @@ The calculation of RESP charges in the current implementation uses [PsiRESP]<htt
 
 #### Mol2 Generation
 The construction of the `.mol2` file is performed by `antechamber` in the AmberTools suite.  However, to reduce reliance on external tools that may change in the future, work is ongoing to create a self-contained `.mol2` generator that can achieve the same results.
+
+
+
+#### TO DO LIST
+working on adding new parameters to library if unknown

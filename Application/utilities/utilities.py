@@ -37,29 +37,29 @@ def DataBaseEntry(location):
         chemdraw = G(location+"*.png")[0]
         html_code+=f"<img src='database/{chemdraw}' width=\"300\">\n"
     if G(location+"settings.txt"):
-        html_code += "<a href=\"{{ url_for('db_download', filename="
+        html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"settings.txt")[0]
-        html_code +=")}}\">AutoParams Settings File</a><br>\n"
+        html_code +="\")}}\">AutoParams Settings File</a><br>\n"
     if G(location+"*.frcmod"):
-        html_code += "<a href=\"{{ url_for('db_download', filename="
+        html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"*.frcmod")[0]
-        html_code +=")}}\">FRCMOD File</a><br>\n"
+        html_code +="\")}}\">FRCMOD File</a><br>\n"
     if G(location+"*.mol2"):
-        html_code += "<a href=\"{{ url_for('db_download', filename="
+        html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"*.mol2")[0]
-        html_code +=")}}\">MOL2 File</a><br>\n"
+        html_code +="\")}}\">MOL2 File</a><br>\n"
     if G(location+"tleap.in"):
-        html_code += "<a href=\"{{ url_for('db_download', filename="
+        html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"tleap.in")[0]
-        html_code +=")}}\">tleap Input File</a><br>\n"
+        html_code +="\")}}\">tleap Input File</a><br>\n"
     if G(location+"*.prmtop"):
-        html_code += "<a href=\"{{ url_for('db_download', filename="
+        html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"*.prmtop")[0]
-        html_code +=")}}\">PRMTOP File</a><br>\n"
+        html_code +="\")}}\">PRMTOP File</a><br>\n"
     if G(location+"*.inpcrd"):
-        html_code += "<a href=\"{{ url_for('db_download', filename="
+        html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"*.inpcrd")[0]
-        html_code +=")}}\">INPCRD File</a><br>\n"
+        html_code +="\")}}\">INPCRD File</a><br>\n"
     html_code+="</fieldset>\n"
     return html_code
 
