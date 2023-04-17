@@ -48,7 +48,11 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
             print("Found missing angle term: ",f"{a1:<2}-{a2:<2}-{a3:<2}")
 
         elif "** No torsion terms for" in line:
-            [a1,a2,a3,a4] = line.split(":")[-1].split("-")
+            [a1,a2,a3,a4] = line.replace("** No torsion terms for","").split("-")
+            a1 = a1.strip()
+            a2 = a2.strip()
+            a3 = a3.strip()
+            a4 = a4.strip()
             if [a3,a2] == sorted([a2,a3]):
                 [a1,a2,a3,a4] = [a4,a3,a2,a1]
             missing_params["DIHEDRALS"].append(f"{a1:<2}-{a2:<2}-{a3:<2}-{a4:<2}")

@@ -113,7 +113,7 @@ class MainJob():
         self.LogJobMessage("Parameter generation failure.")
         return False
     
-    def TestParams(self):
+    def TestParams(self,rerun=True):
         self.LogJobMessage("Testing parameters for generation of MD inputs.")
         curr_miss_params = GetMissingParams(self._restype,
                             self._resname,
@@ -123,9 +123,13 @@ class MainJob():
                             prmtop=self.file_list["PRMTOP"],
                             inpcrd=self.file_list["INPCRD"],
                             pdb=self.file_list["Working PDB"])
+        
         if not curr_miss_params:
             self.LogJobMessage("PRMTOP and INPCRD files successfully generated.")
             return True
+        if rerun:
+            GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname)
+            self.TestParams(rerun=False)
         print(curr_miss_params)
         self.LogJobMessage("Unable to generate PRMTOP and INPCRD files.")
         return False

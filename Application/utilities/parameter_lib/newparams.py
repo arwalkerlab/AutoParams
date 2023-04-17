@@ -15,6 +15,7 @@ BASIC_ATOM_TYPES   = {"C_sp":["CZ","CY"],
                       "P":["P "],
                       "EP":["EP"]
                      }
+
 BOND_LENGTH_DICT = { 'H-O_sb':0.970, 'C_sp2-H':1.120, 'C_sp3-H':1.120, 
                      'C_sp-H':1.120, 'H-N_sp2':1.010, 'H-N_sp3':1.010, 
                      'H-S':1.341, 'H-H':0.737, 'C_sp2-C_sp2':1.340, 
@@ -126,7 +127,6 @@ def CalcBondLength(bond_string):
         return BOND_LENGTH_DICT[base_bond]
     return 1.500
 
-
 def CalcBondForceConstant(bond_string):
     [a1,a2] = bond_string.split("-")
     a1 = GetSimplifiedAtomType(a1)
@@ -138,7 +138,7 @@ def CalcBondForceConstant(bond_string):
     return 300.000
 
 def CalcAngleMeasure(angle):
-    [a1,a2,a3] = line[:8].split("-")
+    [a1,a2,a3] = angle.split("-")
     a1 = GetSimplifiedAtomType(a1)
     a2 = GetSimplifiedAtomType(a2)
     a3 = GetSimplifiedAtomType(a3)
@@ -151,9 +151,8 @@ def CalcAngleMeasure(angle):
     else:
         return 120.000
 
-
 def CalcAngleForceConstant(angle):
-    [a1,a2,a3] = line[:8].split("-")
+    [a1,a2,a3] = angle.split("-")
     a1 = GetSimplifiedAtomType(a1)
     a2 = GetSimplifiedAtomType(a2)
     a3 = GetSimplifiedAtomType(a3)
@@ -165,7 +164,6 @@ def CalcAngleForceConstant(angle):
         return ANGLE_FORCE_CONST_DICT[a2]
     else:
         return 50.0
-    
 
 def NewBond(bond_string):
     bond_length = CalcBondLength(bond_string)
