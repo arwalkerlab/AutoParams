@@ -178,6 +178,15 @@ def NewAngle(angle_string):
 
 def NewDihedral(dihedral_string):
     [a1,a2,a3,a4]=dihedral_string.split("-")
+        # div = divfactor
+        # bar = barrierheight
+        # psa = phaseshiftangle
+        # phn = phasenumber
+    div = 0
+    bar = 0
+    psa = 0
+    phn = 0
+    return f"{a1:<2}-{a2:<2}-{a3:<2}-{a4:<2} {div:>3} {bar:>8.3f} {psa:>13.3f} {phn:>15.3f}\n"
 
 def NewTorsion(torsion_string):
     [a1,a2,a3,a4]=torsion_string.split("-")
