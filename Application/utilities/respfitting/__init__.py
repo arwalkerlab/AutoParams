@@ -8,6 +8,8 @@ def GetRESPCharges(pdbfile,charge,mult,jobfolder):
     resp_charges = []
     S.call(f"PsiRESPJob -p {pdbfile} -c {charge} -m {mult} -d {jobfolder}",shell=True)
     currdir = os.getcwd()
+    if not G(jobfolder+"single_point/"):
+        return False
     os.chdir(jobfolder+"/single_point/")
     S.call("sh run_single_point.sh",shell=True)
     os.chdir(currdir)

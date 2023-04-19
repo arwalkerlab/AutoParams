@@ -1,6 +1,21 @@
 <!doctype html>
 <title>WalkerLabs Parameter Library</title>
 {% include '__main_page_style.html' %}
+<head>
+  <style>    
+  .grid-container {
+      display: grid;
+      grid-template-columns: 24% 24% 24% 24%;
+      background-color: #1D1E28;
+      padding: 5px;
+    }
+    .grid-item {
+      background-color: #1D1E28;
+      /* border: 0px solid #78E2A0; */
+      padding: 10px;
+    }
+  </style>
+</head>
 
 <h1>WalkerLabs Parameter Library</h1>
 <p style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
@@ -17,12 +32,7 @@
     </span>
   </p>
 
+<div class="grid-container">
 
-<!--
-    Below here, we need a table that populates with the complete database
-    It should have:
-        2D ChemDraw structure
-        Mol2 file download link
-        Frcmod file download link
--->
 {% include '__db_dataset.html' %}
+</div>

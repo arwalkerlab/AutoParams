@@ -3,6 +3,11 @@ import psiresp
 import qcelemental as qcel
 import parmed as pm
 import psi4
+import sys
+sys.path.append("/app/")
+from utilities.defaults import AVAILABLE_PSI4_MEMORY
+psi4.set_memory(AVAILABLE_PSI4_MEMORY)
+
 
 def PDB_to_XYZ_data(pdbfile,charge,mult):
     xyzdata = f"{charge} {mult}"
@@ -13,7 +18,7 @@ def PDB_to_XYZ_data(pdbfile,charge,mult):
 
 def RunJob(pdbfile,charge,mult,workdir):
     qc_molecule = qcel.models.Molecule.from_data(PDB_to_XYZ_data(pdbfile,charge,mult))
-    psi_molecule = psiresp.Molecule(qcmol=qc_molecule)
+    psi_molecule = psiresp.Molecule(qcmol=qc_molecule,charge=charge,multiplicity=mult)
     psi_molecule.add_conformer(qcmol=qc_molecule)
     psi_job = psiresp.Job(molecules=[psi_molecule],working_directory=workdir)
     psi_job.run() ## MUST HAVE BOTH INSTANCES OF psi_job.run() TO FUNCTION CORRECTLY.
@@ -24,6 +29,7 @@ def RunJob(pdbfile,charge,mult,workdir):
 
 if __name__ == "__main__":
     import argparse
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("-p",dest="pdbfile",required=True)
     parser.add_argument("-c",dest="charge",default=0)

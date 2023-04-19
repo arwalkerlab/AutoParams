@@ -13,9 +13,26 @@ def random_job_identifier():
     id = uuid.uuid4()
     return id.hex
 
+def RenewSmilesDB():
+    os.chdir(DATABASE_DIR)
+    for folder in G("*/"):
+        smi_file = G(folder+"*.smi")[0]
+        with open(SMILES_DB,"w") as f:
+            f.write(open(smi_file).read())
+            f.write("\n")
+    tmp_lines = []
+    for line in open(SMILES_DB).readlines():
+        if line not in tmp_lines:
+            tmp_lines.append(line)
+    with open(SMILES_DB,"w") as f:
+        for line in tmp_lines:
+            f.write(line)
+    os.chdir(MAIN_DIR)
+
 def RefreshDB():
     global DATABASE_MOLS_SEEN
     DATABASE_MOLS_SEEN = []
+    RenewSmilesDB()
     os.chdir(DATABASE_DIR)
     with open(TEMPLATES_DIR+"__db_dataset.html","w") as f:
         for file_loc in G("*/"):
@@ -24,10 +41,10 @@ def RefreshDB():
 
 def DataBaseEntry(location):
     global DATABASE_MOLS_SEEN
-    html_code = """<fieldset style="border-width:2px; border-style:solid; border-color:#78E2A0; padding: 1em;">"""
+    html_code = """<div class="grid-item"><br>"""
     if G(location+"*.smi"):
         smiles = open(G(location+'*.smi')[0]).read().strip()
-        html_code+=f"<legend>{smiles}</legend>\n"
+        html_code+=f"SMILES:  <b>{smiles}</b><br>\n"
     else:
         return ""
     if smiles in DATABASE_MOLS_SEEN:
@@ -35,7 +52,7 @@ def DataBaseEntry(location):
     DATABASE_MOLS_SEEN.append(smiles)
     if G(location+"*.png"):
         chemdraw = G(location+"*.png")[0]
-        html_code+=f"<img src='database/{chemdraw}' width=\"300\">\n"
+        html_code+=f"<img src='database/{chemdraw}' width=\"98%\"><br>\n"
     if G(location+"settings.txt"):
         html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"settings.txt")[0]
@@ -60,7 +77,7 @@ def DataBaseEntry(location):
         html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"*.inpcrd")[0]
         html_code +="\")}}\">INPCRD File</a><br>\n"
-    html_code+="</fieldset>\n"
+    html_code+="</div>\n"
     return html_code
 
 def CheckSMILESinDB(SMILES):

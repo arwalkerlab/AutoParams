@@ -52,29 +52,26 @@ class MainJob():
         self.file_list["Working PDB"] = self.file_list["Original PDB"]
         self.file_list["SMILES"] = self.file_list["Original PDB"].replace(".pdb",".png").replace(".pdb",".smi")
         self.file_list["LeapLog"] = os.path.join(self._job_folder, "leap.log")
-        self.LogJobMessage("PDB file uploaded")
         self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
-        self.LogJobMessage("ChemDraw figure generated")
         S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["static_temp_png"]}',shell=True)
-        self.LogJobMessage("Copying ChemDraw figure to output.")
-        self.LogJobMessage("<hr>")
+        if CheckSMILESinDB(self._canon_smiles):
+            self.LogJobMessage("Parameters already exist in database.")
+            MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
+            return False
+        return True
 
 
     def CheckPDBQuality(self):
         SingleResidue(self.file_list["Working PDB"])
         self.file_list["Original PDB"] = self.file_list["Original PDB"]+".ORIG"
-        self.LogJobMessage("PDB file checked for single molecule/residue.")
         self._resname = GetResName(self.file_list["Working PDB"])
-        self.LogJobMessage(f"PDB residue name found: {self._resname}")
         try:
-            self.LogJobMessage("Loading PDB into parmed")
             tmp = parmed.load_file(self.file_list["Working PDB"])
-            self.LogJobMessage("PDB file cleaned")        
-            self.LogJobMessage("<hr>")
             return True
         except:
             self.LogJobMessage("PDB file cleaning failed.  Unable to use PDB.")
             self.LogJobMessage("<hr>")
+            MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
             return False
         
     def Optimize(self):
@@ -82,39 +79,35 @@ class MainJob():
             OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity)
             self.LogJobMessage("PDB optimized")
             self.LogJobMessage("<hr>")
+            MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         else:
             self.LogJobMessage("PDB optimization skipped.")
             self.LogJobMessage("<hr>")
+            MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         return True
 
     def RESPCharges(self):
-        self.LogJobMessage("Generating RESP Charges using PsiRESP.")
         self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder)
         if not self._resp_charges:
             self.LogJobMessage("Unable to generate RESP charges.")
             self.LogJobMessage("<hr>")
+            MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
             return False
-        self.LogJobMessage("RESP charges successfully generated.")
-        self.LogJobMessage("<hr>")
         return True
 
     def Parametrize(self):
-        self.LogJobMessage("Generating custom parameters.")
         os.makedirs(self._params_dir,exist_ok=True)
         S.call(f"cp {self.file_list['Working PDB']} {self._params_dir}/param.pdb",shell=True)
         os.chdir(self._params_dir)
-
         GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname)
-
         os.chdir(MAIN_DIR)
         if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
-            self.LogJobMessage("Custom FRCMOD and MOL2 files generated.")
             return True
         self.LogJobMessage("Parameter generation failure.")
+        MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         return False
     
-    def TestParams(self,rerun=True):
-        self.LogJobMessage("Testing parameters for generation of MD inputs.")
+    def TestParams(self):
         curr_miss_params = GetMissingParams(self._restype,
                             self._resname,
                             self.file_list["MOL2"],
@@ -125,17 +118,12 @@ class MainJob():
                             pdb=self.file_list["Working PDB"])
         
         if not curr_miss_params:
-            self.LogJobMessage("PRMTOP and INPCRD files successfully generated.")
             return True
-        if rerun:
-            GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname)
-            self.TestParams(rerun=False)
-        print(curr_miss_params)
         self.LogJobMessage("Unable to generate PRMTOP and INPCRD files.")
+        MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         return False
     
     def AddResultsToDB(self):
-        self.LogJobMessage("In AddResultsToDB()")
         os.makedirs(self._DB_folder,exist_ok=True)
         MaybeCopy(self.file_list['FRCMOD'],f"{self._DB_folder}{self._job_id[:10]}.frcmod")
         MaybeCopy(self.file_list['MOL2'],f"{self._DB_folder}{self._job_id[:10]}.mol2")
@@ -148,4 +136,6 @@ class MainJob():
         RefreshDB()
         self.file_list['FRCMOD'] = self.file_list['FRCMOD'].replace(UPLOAD_FOLDER,"")
         self.file_list['MOL2'] = self.file_list['MOL2'].replace(UPLOAD_FOLDER,"")
+        self.file_list['PRMTOP'] = self.file_list['PRMTOP'].replace(UPLOAD_FOLDER,"")
+        self.file_list['INPCRD'] = self.file_list['INPCRD'].replace(UPLOAD_FOLDER,"")
         return True

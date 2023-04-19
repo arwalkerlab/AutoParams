@@ -26,7 +26,34 @@ def start_page():
         else:
             CURRENT_JOBS[jobid]._opt_complete = True
         print("Current optimization boolean: ",CURRENT_JOBS[jobid]._opt_complete)
-        CURRENT_JOBS[jobid].UploadPDBFile(request.files['PDBfile'])
+        continue_job = CURRENT_JOBS[jobid].UploadPDBFile(request.files['PDBfile'])
+        if not continue_job:
+            new_logfile = f"logfiles/{session['jobid']}.html"
+            S.call(f"touch templates/{new_logfile}",shell=True)
+            new_param_set = f"logfiles/params_{session['jobid']}.html"
+            with open("templates/" + new_param_set,"w") as f:
+                frcmod = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
+                mol2 = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
+                prmtop = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["PRMTOP"]
+                inpcrd = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["INPCRD"]
+                tleapinput = UPLOAD_FOLDER + session["jobid"] + "/tleap.in"
+                print(frcmod)
+                print(mol2)
+                print(prmtop)
+                print(inpcrd)
+                print(tleapinput)
+                if G(frcmod):
+                    f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">FRCMOD</a><br>""")
+                if G(mol2):
+                    f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['MOL2']) }}">MOL2</a><br>""")
+                if G(prmtop):
+                    f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['PRMTOP']) }}">PRMTOP</a><br>""")
+                if G(inpcrd):
+                    f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['INPCRD']) }}">INPCRD</a><br>""")
+                if G(tleapinput):
+                    f.write("""<a href="{{ url_for('download', filename='"""+tleapinput+"""' }}">INPCRD File</a><br>""")
+
+            return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] ,logfile=new_logfile, paramset = new_param_set)
         return render_template("jobqueue.html",curr_job=CURRENT_JOBS[jobid])
     ###  make a folder in 'uploads/' using that job-identifier.
     ###  render_template('loading.html')
@@ -60,24 +87,37 @@ def process_files():
 def show_finished():
     orig_logfile = CURRENT_JOBS[session["jobid"]].file_list["JobLog"]
     new_logfile = f"logfiles/{session['jobid']}.html"
+    new_param_set = f"logfiles/params_{session['jobid']}.html"
+    with open("templates/" + new_param_set,"w") as f:
+        frcmod = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
+        mol2 = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
+        prmtop = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["PRMTOP"]
+        inpcrd = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["INPCRD"]
+        tleapinput = UPLOAD_FOLDER + session["jobid"] + "/tleap.in"
+        print(frcmod)
+        print(mol2)
+        print(prmtop)
+        print(inpcrd)
+        print(tleapinput)
+        if G(frcmod):
+            f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">FRCMOD</a><br>""")
+        if G(mol2):
+            f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['MOL2']) }}">MOL2</a><br>""")
+        if G(prmtop):
+            f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['PRMTOP']) }}">PRMTOP</a><br>""")
+        if G(inpcrd):
+            f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['INPCRD']) }}">INPCRD</a><br>""")
+        if G(tleapinput):
+            f.write("""<a href="{{ url_for('download', filename='"""+tleapinput+"""' }}">INPCRD File</a><br>""")
+
     S.call(f"cp {orig_logfile} templates/{new_logfile}",shell=True)
-    # pdb = CURRENT_JOBS[session["jobid"]].file_list["Working PDB"].split("/")[-1]
-    # charge = CURRENT_JOBS[session["jobid"]]._charge
-    # moltype = CURRENT_JOBS[session["jobid"]]._restype
-    # resname = CURRENT_JOBS[session["jobid"]]._resname
-    # frcmod = CURRENT_JOBS[session["jobid"]].file_list["FRCMOD"]
-    # mol2 = CURRENT_JOBS[session["jobid"]].file_list["MOL2"]
-    # imagefile = CURRENT_JOBS[session["jobid"]].file_list["ChemDraw"].split("/")[-1]
-    
-    return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] ,logfile=new_logfile)
+   
+    return render_template("finished.html", curr_job = CURRENT_JOBS[session['jobid']] ,logfile=new_logfile,paramset = new_param_set)
 
 ### Get Download Link
 @app.route('/upload/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
-    # directory = os.path.dirname(filename)
-    # file_object = os.path.basename(filename)
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
-    # return send_file(filename, as_attachment=True)
 
 @app.route('/database/<path:filename>', methods=['GET', 'POST'])
 def db_download(filename):
@@ -88,64 +128,3 @@ def db_download(filename):
 def database():
     RefreshDB()
     return render_template("database.html")
-
-# @app.route('/',methods=['GET', 'POST'])
-# def start_page():
-#     os.chdir(main_start_dir)
-#     global spiff_job
-#     if request.method == 'POST':
-#         if 'file' not in request.files:
-#             flash('No file part')
-#             return redirect(request.url)
-#         file = request.files['file']
-#         if file.filename == '':
-#             flash('No selected file')
-#             return redirect(request.url)
-#         if file and allowed_file(file.filename):
-#             filename = secure_filename(file.filename)
-#             jobnum = len(G(app.config['UPLOAD_FOLDER']+"*/"))+1
-#             jobdir = os.path.join(app.config['UPLOAD_FOLDER'], f"JOB_{jobnum:>08}/") 
-#             S.call(f"mkdir -p {jobdir}",shell=True)
-#             pdbsavepath = os.path.join(jobdir, filename)
-#             file.save(pdbsavepath)
-#             imagename = filename.replace(".pdb",".png")
-#             PDBtoChemDraw(pdbsavepath,f"static/{imagename}")
-#             charge = request.form['charge']
-#             moltype = request.form['moltype']
-#             resid = request.form['resid']
-#             spiff_job = SPIFF_Job(f"JOB_{jobnum:>08}/{filename}",charge,moltype,resid)
-#             return render_template('loading.html',
-#             pdb=filename,
-#             charge=charge,
-#             moltype=moltype,
-#             resid=resid,
-#             imagename=imagename
-#             )
-#     return render_template('upload_page.html')
-
-# @app.route('/finished',methods=['GET', 'POST'])
-# def show_finished():
-#     global spiff_job
-#     n_db_dirs=len(G(f"{main_start_dir}/database/*/"))+1
-#     dbdir = f"{main_start_dir}/database/job_{n_db_dirs:>09}/"
-#     os.makedirs(dbdir,exist_ok=True)
-#     S.call(f"cp {spiff_job.frcmod} {spiff_job.mol2} {dbdir}",shell=True)
-#     os.chdir(main_start_dir)
-#     return render_template("finished.html",pdb=spiff_job.pdb,
-#             charge=spiff_job.charge,
-#             moltype=spiff_job.moltype,
-#             resid=spiff_job.resid,
-#             frcmod = spiff_job.frcmod,
-#             mol2 = spiff_job.mol2,
-#             imagename=spiff_job.pdb.replace(".pdb",".png"))
-
-# @app.route('/process_files/',methods=['GET', 'POST'])
-# def process_files():
-#     global spiff_job
-#     currdir = os.getcwd()
-#     os.chdir(app.config['UPLOAD_FOLDER'])
-#     spiff_job.run()
-#     os.chdir(currdir)
-#     return "Files Processed"
-
-

@@ -1,12 +1,9 @@
 #!/bin/bash
-
 ########### Variables ###########
 # Name of the image (instead of the hash of numbers and letters)
 IMAGENAME=flask-auto-params
-
 # Name for the resulting container to be generated.
 CONTAINERNAME=AutoParametrizer
-
 # Port assignment from inside the docker container to the host system. 
 HOST_PORT=5000
 DOCKER_PORT=5005
