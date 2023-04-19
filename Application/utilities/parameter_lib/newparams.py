@@ -112,10 +112,143 @@ ANGLE_FORCE_CONST_DICT = {
 "EP-S-S":   150.000,"O_sb":   103.958,"H":     0.000,"C_sp2":    62.307,"N_sp2":    74.741,"P":    82.238,
 "C_sp3":    54.763,"C_sp":    70.000,"N_sp3":    80.833,"S":   110.800,"O_db":   150.000}
 
+DIHEDRAL_SET_DICT = {"C_sp2-C_sp2-C_sp2-O_db":"WW-XX-YY-ZZ   1    2.175       180.0            -2.\nWW-XX-YY-ZZ   1    0.30          0.0             3.",
+                   "C_sp3-C_sp2-C_sp2-C_sp3":"WW-XX-YY-ZZ   1    6.65        180.0            -2.\nWW-XX-YY-ZZ   1    1.90        180.0             1.",
+                   "C_sp2-C_sp2-C_sp2-X ":"WW-XX-YY-ZZ   1    2.175       180.0            -2.\nWW-XX-YY-ZZ   1    0.30          0.0             3.",
+                   "O_db-C_sp2-C_sp2-X ":"WW-XX-YY-ZZ   1    2.175       180.0            -2.\nWW-XX-YY-ZZ   1    0.30          0.0             3.",
+                   "C_sp3-C_sp2-C_sp2-X ":"WW-XX-YY-ZZ   1    6.65        180.0            -2.\nWW-XX-YY-ZZ   1    1.90        180.0             1.",
+                   "X -C_sp2-C_sp2-X ":"WW-XX-YY-ZZ    4   16.10        180.0             2. ",
+                   "H -C_sp2-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.00          0.0            -3.\nWW-XX-YY-ZZ   1    0.250         0.0             1.",
+                   "O_sb-C_sp2-C_sp3-C_sp3":"WW-XX-YY-ZZ   1    1.178040    190.97653        -1. \nWW-XX-YY-ZZ   1    0.092102    295.63279        -2. \nWW-XX-YY-ZZ   1    0.962830    348.09535         3. ",
+                   "C_sp2-C_sp2-C_sp3-H ":"WW-XX-YY-ZZ   1    0.38        180.0            -3. \nWW-XX-YY-ZZ   1    1.15          0.0             1. ",
+                   "N_sp2-C_sp2-C_sp3-N_sp2":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.55        180.0            -3. \nWW-XX-YY-ZZ   1    1.58        180.0            -2.\nWW-XX-YY-ZZ   1    0.45        180.0             1.",
+                   "N_sp2-C_sp2-C_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.40          0.0            -3. \nWW-XX-YY-ZZ   1    0.20          0.0            -2.\nWW-XX-YY-ZZ   1    0.20          0.0             1.",
+                   "O_db-C_sp2-C_sp3-H ":"WW-XX-YY-ZZ   1    0.80          0.0            -1. \nWW-XX-YY-ZZ   1    0.00          0.0            -2. \nWW-XX-YY-ZZ   1    0.08        180.0             3. ",
+                   "X -C_sp2-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.00          0.0            -3.\nWW-XX-YY-ZZ   1    0.250         0.0             1.",
+                   "X -C_sp2-C_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.40          0.0            -3. \nWW-XX-YY-ZZ   1    0.20          0.0            -2.\nWW-XX-YY-ZZ   1    0.20          0.0             1.",
+                   "X -C_sp2-C_sp3-H ":"WW-XX-YY-ZZ   1    0.80          0.0            -1. \nWW-XX-YY-ZZ   1    0.00          0.0            -2. \nWW-XX-YY-ZZ   1    0.08        180.0             3. ",
+                   "X -C_sp2-C_sp3-N_sp2":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.55        180.0            -3. \nWW-XX-YY-ZZ   1    1.58        180.0            -2.\nWW-XX-YY-ZZ   1    0.45        180.0             1.",
+                   "H -C_sp2-C_sp3-X ":"WW-XX-YY-ZZ   1    0.00          0.0            -3.\nWW-XX-YY-ZZ   1    0.250         0.0             1.",
+                   "O_sb-C_sp2-C_sp3-X ":"WW-XX-YY-ZZ   1    1.178040    190.97653        -1. \nWW-XX-YY-ZZ   1    0.092102    295.63279        -2. \nWW-XX-YY-ZZ   1    0.962830    348.09535         3. ",
+                   "C_sp2-C_sp2-C_sp3-X ":"WW-XX-YY-ZZ   1    0.38        180.0            -3. \nWW-XX-YY-ZZ   1    1.15          0.0             1. ",
+                   "N_sp2-C_sp2-C_sp3-X ":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.55        180.0            -3. \nWW-XX-YY-ZZ   1    1.58        180.0            -2.\nWW-XX-YY-ZZ   1    0.45        180.0             1.",
+                   "X -C_sp2-C_sp3-X ":"WW-XX-YY-ZZ   6    0.00          0.0             2. ",
+                   "O_db-C_sp2-N_sp2-H ":"WW-XX-YY-ZZ   1    2.50        180.0            -2. \nWW-XX-YY-ZZ   1    2.00          0.0             1. ",
+                   "O_db-C_sp2-N_sp2-EP":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "C_sp3-C_sp2-N_sp2-EP":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "X -C_sp2-N_sp2-H ":"WW-XX-YY-ZZ   1    2.50        180.000          -2. \nWW-XX-YY-ZZ   1    2.00          0.0             1. ",
+                   "X -C_sp2-N_sp2-EP":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "O_db-C_sp2-N_sp2-X ":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "C_sp3-C_sp2-N_sp2-X ":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "X -C_sp2-N_sp2-X ":"WW-XX-YY-ZZ   2    7.40        180.000           2. ",
+                   "X -C_sp2-O_db-X ":"WW-XX-YY-ZZ   4   11.20        180.000           2. ",
+                   "O_db-C_sp2-O_sb-H ":"WW-XX-YY-ZZ   1    2.30        180.000          -2.\nWW-XX-YY-ZZ   1    1.90          0.0             1.",
+                   "O_db-C_sp2-O_sb-C_sp3":"WW-XX-YY-ZZ   1    2.70        180.000          -2.\nWW-XX-YY-ZZ   1    1.40        180.0             1.",
+                   "C_sp2-C_sp2-O_sb-EP":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "H -C_sp2-O_sb-EP":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "O_db-C_sp2-O_sb-X ":"WW-XX-YY-ZZ   1    2.30        180.000          -2.\nWW-XX-YY-ZZ   1    1.90          0.0             1.",
+                   "C_sp2-C_sp2-O_sb-X ":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "H -C_sp2-O_sb-X ":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "X -C_sp2-O_sb-H ":"WW-XX-YY-ZZ   1    2.30        180.000          -2.\nWW-XX-YY-ZZ   1    1.90          0.0             1.",
+                   "X -C_sp2-O_sb-C_sp3":"WW-XX-YY-ZZ   1    2.70        180.000          -2.\nWW-XX-YY-ZZ   1    1.40        180.0             1.",
+                   "X -C_sp2-O_sb-EP":"WW-XX-YY-ZZ   1    0.000       180.000           2.0",
+                   "X -C_sp2-O_sb-X ":"WW-XX-YY-ZZ   2    4.00        180.000           2.",
+                   "X -C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   9    1.40          0.0             3.",
+                   "X -C_sp3-C_sp-X ":"WW-XX-YY-ZZ   3    0.00          0.0             1. ",
+                   "O_sb-C_sp3-N_sp2-C_sp2":"WW-XX-YY-ZZ   1    0.98023     110.0984         -1.\nWW-XX-YY-ZZ   1    1.38071      13.7765         -2.\nWW-XX-YY-ZZ   1    0.60481     176.3635         -3.\nWW-XX-YY-ZZ   1    0.30675      17.8068          4.",
+                   "C_sp2-C_sp3-N_sp2-C_sp2":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.42          0.0            -3.\nWW-XX-YY-ZZ   1    0.27          0.0            -2.\nWW-XX-YY-ZZ   1    0.00          0.0             1.",
+                   "C_sp3-C_sp3-N_sp2-C_sp2":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.40          0.0            -3.\nWW-XX-YY-ZZ   1    2.00          0.0            -2.\nWW-XX-YY-ZZ   1    2.00          0.0             1.",
+                   "X -C_sp3-N_sp2-C_sp2":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.42          0.0            -3.\nWW-XX-YY-ZZ   1    0.27          0.0            -2.\nWW-XX-YY-ZZ   1    0.00          0.0             1.",
+                   "O_sb-C_sp3-N_sp2-X ":"WW-XX-YY-ZZ   1    0.98023     110.0984         -1.\nWW-XX-YY-ZZ   1    1.38071      13.7765         -2.\nWW-XX-YY-ZZ   1    0.60481     176.3635         -3.\nWW-XX-YY-ZZ   1    0.30675      17.8068          4.",
+                   "C_sp2-C_sp3-N_sp2-X ":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.42          0.0            -3.\nWW-XX-YY-ZZ   1    0.27          0.0            -2.\nWW-XX-YY-ZZ   1    0.00          0.0             1.",
+                   "C_sp3-C_sp3-N_sp2-X ":"WW-XX-YY-ZZ   1    0.00          0.0            -4. \nWW-XX-YY-ZZ   1    0.40          0.0            -3.\nWW-XX-YY-ZZ   1    2.00          0.0            -2.\nWW-XX-YY-ZZ   1    2.00          0.0             1.",
+                   "X -C_sp3-N_sp2-X ":"WW-XX-YY-ZZ   6    0.00          0.0             2. ",
+                   "C_sp3-C_sp3-N_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.30          0.0            -3.\nWW-XX-YY-ZZ   1    0.48        180.0             2.",
+                   "H -C_sp3-N_sp3-EP":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "C_sp3-C_sp3-N_sp3-EP":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "X -C_sp3-N_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.30          0.0            -3.\nWW-XX-YY-ZZ   1    0.48        180.0             2.",
+                   "X -C_sp3-N_sp3-EP":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "C_sp3-C_sp3-N_sp3-X ":"WW-XX-YY-ZZ   1    0.30          0.0            -3.\nWW-XX-YY-ZZ   1    0.48        180.0             2.",
+                   "H -C_sp3-N_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "X -C_sp3-N_sp3-X ":"WW-XX-YY-ZZ    6    1.80          0.0             3. ",
+                   "C_sp2-C_sp3-O_sb-C_sp3":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.100       180.0             2.",
+                   "C_sp3-C_sp3-O_sb-H ":"WW-XX-YY-ZZ   1    0.16          0.0            -3.\nWW-XX-YY-ZZ   1    0.25          0.0             1.",
+                   "C_sp3-C_sp3-O_sb-C_sp3":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.1         180.0             2.",
+                   "C_sp3-C_sp3-O_sb-C_sp2":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.80        180.0             1.",
+                   "C_sp3-C_sp3-O_sb-EP":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "O_sb-C_sp3-O_sb-C_sp3":"WW-XX-YY-ZZ   1    0.10          0.0            -3.\nWW-XX-YY-ZZ   1    0.85        180.0            -2.\nWW-XX-YY-ZZ   1    1.35        180.0             1.",
+                   "N_sp2-C_sp3-O_sb-C_sp3":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.65          0.0             2.",
+                   "H -C_sp3-O_sb-EP":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "X -C_sp3-O_sb-H ":"WW-XX-YY-ZZ   1    0.16          0.0            -3.\nWW-XX-YY-ZZ   1    0.25          0.0             1.",
+                   "X -C_sp3-O_sb-C_sp3":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.1         180.0             2.",
+                   "X -C_sp3-O_sb-C_sp2":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.80        180.0             1.",
+                   "X -C_sp3-O_sb-EP":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "C_sp2-C_sp3-O_sb-X ":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.100       180.0             2.",
+                   "C_sp3-C_sp3-O_sb-X ":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.80        180.0             1.",
+                   "O_sb-C_sp3-O_sb-X ":"WW-XX-YY-ZZ   1    0.10          0.0            -3.\nWW-XX-YY-ZZ   1    0.85        180.0            -2.\nWW-XX-YY-ZZ   1    1.35        180.0             1.",
+                   "N_sp2-C_sp3-O_sb-X ":"WW-XX-YY-ZZ   1    0.383         0.0            -3.\nWW-XX-YY-ZZ   1    0.65          0.0             2.",
+                   "H -C_sp3-O_sb-X ":"WW-XX-YY-ZZ   1    0.000         0.000           3.0",
+                   "X -C_sp3-O_sb-X ":"WW-XX-YY-ZZ   3    0.50          0.0             3. ",
+                   "X -C_sp3-S -X ":"WW-XX-YY-ZZ   3    1.00          0.0             3. ",
+                   "C_sp2-O_sb-P -O_db":"WW-XX-YY-ZZ   1    0.0         180.0            -3.\nWW-XX-YY-ZZ   1    0.0         180.0             1.",
+                   "C_sp2-O_sb-P -O_sb":"WW-XX-YY-ZZ   1    0.185181     31.79508        -1.\nWW-XX-YY-ZZ   1    1.256531    351.95960        -2.\nWW-XX-YY-ZZ   1    0.354858    357.24748         3.",
+                   "C_sp3-O_sb-P -O_sb":"WW-XX-YY-ZZ   1    0.25          0.0            -3.\nWW-XX-YY-ZZ   1    1.20          0.0             2.",
+                   "X -O_sb-P -O_db":"WW-XX-YY-ZZ   1    0.0         180.0            -3.\nWW-XX-YY-ZZ   1    0.0         180.0             1.",
+                   "X -O_sb-P -O_sb":"WW-XX-YY-ZZ   1    0.185181     31.79508        -1.\nWW-XX-YY-ZZ   1    1.256531    351.95960        -2.\nWW-XX-YY-ZZ   1    0.354858    357.24748         3.",
+                   "C_sp2-O_sb-P -X ":"WW-XX-YY-ZZ   1    0.185181     31.79508        -1.\nWW-XX-YY-ZZ   1    1.256531    351.95960        -2.\nWW-XX-YY-ZZ   1    0.354858    357.24748         3.",
+                   "C_sp3-O_sb-P -X ":"WW-XX-YY-ZZ   1    0.25          0.0            -3.\nWW-XX-YY-ZZ   1    1.20          0.0             2.",
+                   "X -O_sb-P -X ":"WW-XX-YY-ZZ   3    0.75          0.0             3.",
+                   "C_sp2-C_sp3-C_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.180         0.0            -3.\nWW-XX-YY-ZZ   1    0.250       180.0            -2.\nWW-XX-YY-ZZ   1    0.200       180.0             1.",
+                   "H -C_sp3-C_sp3-H ":"WW-XX-YY-ZZ   1    0.15          0.0             3. ",
+                   "H -C_sp3-C_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.16          0.0             3.",
+                   "O_sb-C_sp3-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.144         0.0            -3.\nWW-XX-YY-ZZ   1    1.175         0.0             2.",
+                   "F -C_sp3-C_sp3-F ":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    1.20        180.0             1.",
+                   "Cl-C_sp3-C_sp3-Cl":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.45        180.0             1.",
+                   "Br-C_sp3-C_sp3-Br":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.00        180.0             1.",
+                   "H -C_sp3-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.25          0.0             1.",
+                   "H -C_sp3-C_sp3-F ":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.19          0.0             1.",
+                   "H -C_sp3-C_sp3-Cl":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.25          0.0             1.",
+                   "H -C_sp3-C_sp3-Br":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.55          0.0             1.",
+                   "H -C_sp3-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.25          0.0             1.",
+                   "N_sp2-C_sp3-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4.",
+                   "C_sp2-C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.180         0.0            -3.\nWW-XX-YY-ZZ   1    0.250       180.0            -2.\nWW-XX-YY-ZZ   1    0.200       180.0             1.",
+                   "H -C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.16          0.0             3.",
+                   "F -C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    1.20        180.0             1.",
+                   "Cl-C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.45        180.0             1.",
+                   "Br-C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.00        180.0             1.",
+                   "N_sp2-C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4.",
+                   "C_sp3-C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.180         0.0            -3.\nWW-XX-YY-ZZ   1    0.250       180.0            -2.\nWW-XX-YY-ZZ   1    0.200       180.0             1.",
+                   "O_sb-C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4.",
+                   "X -C_sp3-C_sp3-C_sp2":"WW-XX-YY-ZZ   1    0.180         0.0            -3.\nWW-XX-YY-ZZ   1    0.250       180.0            -2.\nWW-XX-YY-ZZ   1    0.200       180.0             1.",
+                   "X -C_sp3-C_sp3-H ":"WW-XX-YY-ZZ   1    0.16          0.0             3.",
+                   "X -C_sp3-C_sp3-F ":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    1.20        180.0             1.",
+                   "X -C_sp3-C_sp3-Cl":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.45        180.0             1.",
+                   "X -C_sp3-C_sp3-Br":"WW-XX-YY-ZZ   1    0.000         0.0            -3.\nWW-XX-YY-ZZ   1    0.00        180.0             1.",
+                   "X -C_sp3-C_sp3-N_sp2":"WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4.",
+                   "X -C_sp3-C_sp3-C_sp3":"WW-XX-YY-ZZ   1    0.180         0.0            -3.\nWW-XX-YY-ZZ   1    0.250       180.0            -2.\nWW-XX-YY-ZZ   1    0.200       180.0             1.",
+                   "X -C_sp3-C_sp3-O_sb":"WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4.",
+                   "X -C_sp3-C_sp3-X ":"WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4.",
+                   "C_sp2-N_sp2-P -O_db":"WW-XX-YY-ZZ   1    0.12          0.0             3.",
+                   "X -N_sp2-P -O_db":"WW-XX-YY-ZZ   1    0.12          0.0             3.",
+                   "C_sp2-N_sp2-P -X ":"WW-XX-YY-ZZ   1    0.12          0.0             3.",
+                   "X -N_sp2-P -X ":"WW-XX-YY-ZZ   1    0.12          0.0             3.",
+                   "C_sp3-S -S -C_sp3":"WW-XX-YY-ZZ   1    3.50          0.0            -2.\nWW-XX-YY-ZZ   1    0.60          0.0             3.",
+                   "C_sp3-S -S -EP":"WW-XX-YY-ZZ   1    0.00          0.0             3.",
+                   "C_sp3-S -S -X ":"WW-XX-YY-ZZ   1    3.50          0.0            -2.\nWW-XX-YY-ZZ   1    0.60          0.0             3.",
+                   "X -S -S -C_sp3":"WW-XX-YY-ZZ   1    3.50          0.0            -2.\nWW-XX-YY-ZZ   1    0.60          0.0             3.",
+                   "X -S -S -X ":"WW-XX-YY-ZZ   1    0.00          0.0             3.",
+                   "C_sp3-C_sp-C_sp-H ":"WW-XX-YY-ZZ   1    0.00          0.0             1.",
+                   "X -C_sp-C_sp-H ":"WW-XX-YY-ZZ   1    0.00          0.0             1.",
+                   "C_sp3-C_sp-C_sp-X ":"WW-XX-YY-ZZ   1    0.00          0.0             1.",
+                   "X -C_sp-C_sp-X ":"WW-XX-YY-ZZ   1    0.00          0.0             1.",
+                  }
+
+
 def GetSimplifiedAtomType(atom):
     for key,value in BASIC_ATOM_TYPES.items():
         if atom in value:
             return str(key)
+    return "X "
         
 def CalcBondLength(bond_string):
     [a1,a2] = bond_string.split("-")
@@ -174,19 +307,43 @@ def NewAngle(angle_string):
     [a1,a2,a3]=angle_string.split("-")
     angle_measure = CalcAngleMeasure(angle_string)
     force_const = CalcAngleForceConstant(angle_string)
-    return f"{angle_string:<8}   {force_const:>5.1f}      {angle_measure:>6.3f}"
+    return f"{angle_string:<8}   {force_const:>5.1f}      {angle_measure:>6.3f}\n"
 
-def NewDihedral(dihedral_string):
-    [a1,a2,a3,a4]=dihedral_string.split("-")
-        # div = divfactor
-        # bar = barrierheight
-        # psa = phaseshiftangle
-        # phn = phasenumber
-    div = 0
-    bar = 0
-    psa = 0
-    phn = 0
-    return f"{a1:<2}-{a2:<2}-{a3:<2}-{a4:<2} {div:>3} {bar:>8.3f} {psa:>13.3f} {phn:>15.3f}\n"
+def NewDihedral(dihe_string):
+    [a1,a2,a3,a4] = dihe_string.split("-")
+    a1 = GetSimplifiedAtomType(a1)
+    a2 = GetSimplifiedAtomType(a2)
+    a3 = GetSimplifiedAtomType(a3)
+    a4 = GetSimplifiedAtomType(a4)
+    if [a3,a2] == sorted([a2,a3]):
+        [a1,a2,a3,a4] = [a4,a3,a2,a1]
+        
+    ## check for complete key in dihedral dictionary
+    if f"{a1:<2}-{a2:<2}-{a3:<2}-{a4:<2}" in DIHEDRAL_SET_DICT.keys():
+        dihedral_string = DIHEDRAL_SET_DICT[f"{a1:<2}-{a2:<2}-{a3:<2}-{a4:<2}"]
+       
+    ## check for first three in dihedral dictionary
+    elif f"{a1:<2}-{a2:<2}-{a3:<2}-X " in DIHEDRAL_SET_DICT.keys():
+        dihedral_string = DIHEDRAL_SET_DICT[f"{a1:<2}-{a2:<2}-{a3:<2}-X "]
+    
+    ## check for last three in dihedral dictionary
+    elif f"X -{a2:<2}-{a3:<2}-{a4:<2}" in DIHEDRAL_SET_DICT.keys():
+        dihedral_string = DIHEDRAL_SET_DICT[f"X -{a2:<2}-{a3:<2}-{a4:<2}"]
+    
+    ## check for middle two in dihedral dictionary
+    elif f"X -{a2:<2}-{a3:<2}-X " in DIHEDRAL_SET_DICT.keys():
+        dihedral_string = DIHEDRAL_SET_DICT[f"X -{a2:<2}-{a3:<2}-X "]
+    
+    ## return a basic dihedral parameter. (sp3-C to sp3-C single bond)
+    else:
+        dihedral_string = "WW-XX-YY-ZZ   1    0.000         0.000          -1.\nWW-XX-YY-ZZ   1    1.490         0.000          -2.\nWW-XX-YY-ZZ   1    0.156         0.000          -3.\nWW-XX-YY-ZZ   1    0.000         0.000           4."
+    [a1,a2,a3,a4] = dihe_string.split("-")
+    dihedral_string = dihedral_string.replace("WW",a1)
+    dihedral_string = dihedral_string.replace("XX",a2)
+    dihedral_string = dihedral_string.replace("YY",a3)
+    dihedral_string = dihedral_string.replace("ZZ",a4)
+    dihedral_string = dihedral_string.strip() + "\n"
+    return dihedral_string
 
 def NewTorsion(torsion_string):
     [a1,a2,a3,a4]=torsion_string.split("-")

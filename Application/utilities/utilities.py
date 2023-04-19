@@ -74,3 +74,6 @@ def CheckSMILESinDB(SMILES):
 def MaybeCopy(source,dest):
     if G(source):
         S.call(f"cp {source} {dest}",shell=True)
+
+def FileExists(filepath):
+    return os.path.exists(filepath)

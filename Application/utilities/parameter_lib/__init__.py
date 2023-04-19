@@ -1,4 +1,5 @@
 from .library_management import *
+from .newparams import *
 
 # Clean and sort the library files
 CleanBondsLibraryFile()

@@ -18,8 +18,18 @@
 <!-- File Download Block -->
 <fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
     <legend>Parameter Files</legend>
-    <a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">frcmod File</a><br>
-    <a href="{{ url_for('download', filename=curr_job.file_list['MOL2']) }}">mol2 File</a><br>
+    {% if FileExists(curr_job.file_list['FRCMOD']) %} 
+    <a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">FRCMOD File</a><br>
+    {% endif %}
+    {% if FileExists(curr_job.file_list['MOL2']) %} 
+    <a href="{{ url_for('download', filename=curr_job.file_list['MOL2']) }}">MOL2 File</a><br>
+    {% endif %}
+    {% if FileExists(curr_job.file_list['PRMTOP']) %} 
+    <a href="{{ url_for('download', filename=curr_job.file_list['PRMTOP']) }}">PRMTOP File</a><br>
+    {% endif %}
+    {% if FileExists(curr_job.file_list['INPCRD']) %} 
+    <a href="{{ url_for('download', filename=curr_job.file_list['INPCRD']) }}">INPCRD File</a><br>
+    {% endif %}    
 </fieldset>
 <br>
 

@@ -1,5 +1,5 @@
 from ..utilities import *
-from ..parameter_lib import ALL_KNOWN_PARAMS
+from ..parameter_lib import *
 
 def GenerateFRCMODFile(base_ff,frcmod,missing_params):
     with open(frcmod,"w") as f:
@@ -10,7 +10,7 @@ def GenerateFRCMODFile(base_ff,frcmod,missing_params):
             if missing_bond in ALL_KNOWN_PARAMS["BONDS"].keys():
                 f.write(ALL_KNOWN_PARAMS["BONDS"][missing_bond])
             else:
-                # deal with unknown bond here.
+                f.write(NewBond(missing_bond))
                 pass
         f.write("\n")
         f.write("ANGLE\n")
@@ -18,7 +18,7 @@ def GenerateFRCMODFile(base_ff,frcmod,missing_params):
             if missing_angle in ALL_KNOWN_PARAMS["ANGLES"].keys():
                 f.write(ALL_KNOWN_PARAMS["ANGLES"][missing_angle])
             else:
-                # deal with unknown angle here.
+                f.write(NewAngle(missing_angle))
                 pass
         f.write("\n")
         f.write("DIHE\n")
@@ -26,7 +26,7 @@ def GenerateFRCMODFile(base_ff,frcmod,missing_params):
             if missing_dihe in ALL_KNOWN_PARAMS["DIHEDRALS"].keys():
                 f.write(ALL_KNOWN_PARAMS["DIHEDRALS"][missing_dihe])
             else:
-                # deal with unknown dihedral here.
+                f.write(NewDihedral(missing_dihe))
                 pass
         f.write("\n")
         f.write("IMPROPER\n")
@@ -34,6 +34,6 @@ def GenerateFRCMODFile(base_ff,frcmod,missing_params):
             if missing_torsion in ALL_KNOWN_PARAMS["TORSIONS"].keys():
                 f.write(ALL_KNOWN_PARAMS["TORSIONS"][missing_torsion])
             else:
-                # deal with unknown dihedral here.
+                # deal with unknown improper torsion here.
                 pass
         f.write("\n\n")
