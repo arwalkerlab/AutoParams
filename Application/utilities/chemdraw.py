@@ -15,7 +15,4 @@ def PDBtoChemDraw(pdb,output):
         obConversion.WriteFile(mol, smi_file)
     smiles = Chem.MolToSmiles(Chem.MolFromSmiles(open(smi_file).read().split()[0]))
     Draw.MolToFile(Chem.MolFromSmiles(smiles), output, size=(1268,720))
-    # if not CheckSMILESinDB(smiles):
-    #     with open(SMILES_DB,"a") as f:
-    #         f.write(smiles+"\n")
     return smiles

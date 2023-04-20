@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-psi4 --qcschema C24H35N6O24S5_15d76bf24db933079e9956340ae9ddc2842274b5_4d9bb6d245f75e8aea535e7b9676614d130d864b.msgpack
