@@ -33,7 +33,7 @@ docker run --network=host --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PO
 
 #### Cleanup on container exit ####
 # Purge the container
-# docker rm -f $(docker ps -aq)
+docker rm -f $(docker ps -aq)
 
 # Purge the image
-# docker image rm -f $(docker images -aq)
+docker image rm -f $(docker images -aq)
