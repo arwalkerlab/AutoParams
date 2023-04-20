@@ -1,7 +1,7 @@
 #!/bin/bash
 ########### Variables ###########
 # Name of the image (instead of the hash of numbers and letters)
-IMAGENAME=flask-auto-params
+IMAGENAME=markahix/auto-params:apb-psi4
 # Name for the resulting container to be generated.
 CONTAINERNAME=AutoParametrizer
 # Port assignment from inside the docker container to the host system. 
@@ -33,7 +33,7 @@ docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
 
 #### Cleanup on container exit ####
 # Purge the container
-docker rm $(docker ps -aq)
+docker rm -f $(docker ps -aq)
 
 # Purge the image
-docker image rm $(docker images -aq)
+docker image rm -f $(docker images -aq)

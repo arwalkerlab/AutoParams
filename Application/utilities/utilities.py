@@ -14,6 +14,7 @@ def random_job_identifier():
     return id.hex
 
 def RenewSmilesDB():
+    S.call(f"touch {SMILES_DB}",shell=True)
     os.chdir(DATABASE_DIR)
     for folder in G("*/"):
         smi_file = G(folder+"*.smi")[0]

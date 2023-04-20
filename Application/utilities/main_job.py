@@ -54,6 +54,7 @@ class MainJob():
         self.file_list["LeapLog"] = os.path.join(self._job_folder, "leap.log")
         self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
         S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["static_temp_png"]}',shell=True)
+        RefreshDB()
         if CheckSMILESinDB(self._canon_smiles):
             self.LogJobMessage("Parameters already exist in database.")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
