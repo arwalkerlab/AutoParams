@@ -25,9 +25,12 @@ RUN chmod +x /bin/PsiRESPJob
 # Move into /app/ where Flask Application is now located.
 WORKDIR /app/
 
-# On container initialization, run the flask app, exposed
-# ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0","--port=5005"]
+# Publish ports
 EXPOSE 5005
-RUN echo "conda activate psi4flask" >> /root/.bashrc
-RUN echo "flask run --host=0.0.0.0 --port=5005" >> /root/.bashrc
+
+# On container initialization, run the flask app, exposed
+ENTRYPOINT ["conda", "run", "-n", "psi4flask", "flask", "run","--host=0.0.0.0","--port=5005"]
+# RUN echo "conda activate psi4flask" >> /root/.bashrc
+# RUN echo "flask run --host=0.0.0.0 --port=5005" >> /root/.bashrc 
+# 
 # RUN echo "exit" >> /root/.bashrc
