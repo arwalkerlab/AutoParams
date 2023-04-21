@@ -60,6 +60,10 @@ class MainJob():
         self.file_list["Working PDB"] = self.file_list["Original PDB"]
         self.file_list["SMILES"] = self.file_list["Original PDB"].replace(".pdb",".png").replace(".pdb",".smi")
         self.file_list["LeapLog"] = os.path.join(self._job_folder, "leap.log")
+        ### Check if the file has too many atoms/molecules
+        if PDBisTooBig(self.file_list["Original PDB"]):
+            self.LogJobMessage("Over 500 atoms found in provided structure.  This server is designed for single molecules or non-standard polymer subunits.")
+            return False
         self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
         S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["static_temp_png"]}',shell=True)
         RefreshDB()

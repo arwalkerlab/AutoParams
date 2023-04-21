@@ -1,5 +1,12 @@
 import subprocess
 
+def PDBisTooBig(pdbfile):
+    n_atoms = 0
+    for line in open(pdbfile).readlines():
+        if any(["ATOM" in line,"HETATM" in line]):
+            n_atoms+=1
+    return bool(n_atoms>500)
+
 def SingleResidue(pdbfile):
     subprocess.call(f"cp {pdbfile} {pdbfile}.ORIG",shell=True)
     lines = open(pdbfile).readlines()
