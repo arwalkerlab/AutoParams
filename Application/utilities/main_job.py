@@ -1,12 +1,20 @@
 from .defaults import *
 from .utilities import *
 from .pdbclean import *
-from .optimize import *
+
+### Optimizer ###
+# from .optimize import *
+from ._OPT.Psi4 import OptimizePDB
+# from ._OPT.TeraChem import OptimizePDB
+
+### RESP Fitting ###
+# from .respfitting import *
+from ._RESP.Psi4 import GetRESPCharges
+# from ._RESP.TeraChem import GetRESPCharges
+
 from .chemdraw import *
-from .respfitting import *
 from .parametrize import *
 from .testing import *
-
 
 class MainJob():
     def __init__(self,jobid):
@@ -60,7 +68,6 @@ class MainJob():
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
             return False
         return True
-
 
     def CheckPDBQuality(self):
         SingleResidue(self.file_list["Working PDB"])
