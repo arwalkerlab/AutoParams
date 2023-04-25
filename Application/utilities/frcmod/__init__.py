@@ -2,6 +2,9 @@ from ..utilities import *
 from ..parameter_lib import *
 
 def GenerateFRCMODFile(base_ff,frcmod,missing_params):
+    if not missing_params:
+        S.call(f"touch {frcmod}",shell=True)
+        return
     with open(frcmod,"w") as f:
         frcmod_name = frcmod.split("/")[-1].replace(".frcmod","")
         f.write(f"{frcmod_name}, use with {base_ff.replace('source','')}\n")
@@ -51,3 +54,4 @@ def GenerateFRCMODFile(base_ff,frcmod,missing_params):
             else:
                 f.write(NewNonBonded(missing_nonbonded))
         f.write("\n\n")
+    return

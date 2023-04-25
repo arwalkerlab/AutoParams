@@ -1,0 +1,40 @@
+<script>
+    function RunOptimization()
+    {
+      if (document.getElementById('OptFirst').checked)
+      {
+        document.getElementById('OptSettings').style.visibility = 'visible';
+      }
+      else document.getElementById('OptSettings').style.visibility = 'hidden';
+    }
+</script>
+    
+<fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
+  <legend>Calculation Options</legend>
+  <b>Optimization, especially of larger molecules, can be a very time-consuming process.</b><br>
+  If your molecule has already been optimized, or you don't want it optimized, <b>uncheck</b> this box.<br>
+  <!-- runs the above javascript command whenever checked/unchecked.-->
+  <input type="checkbox" id="OptFirst" name="optimize_job" onclick="javascript:RunOptimization();">
+  <label for="OptFirst">Optimize Structure before generating parameters? (This will require more time to complete.)</label>
+
+<!-- Optimization Settings - visible only if OptFirst checkbox is checked. -->
+<div id="OptSettings" style="visibility:hidden">
+
+<br>
+
+  <!-- Level of Theory -->
+<select id="LevelOfTheory" name="level_of_theory"  style="width:200px">
+{% include '__levels_of_theory.html' %}
+</select> 
+<label for="LevelOfTheory">  Level of theory</label>
+
+<br>
+
+<!-- Basis Set Selection -->
+<select id="BasisSet" name="basis_set"  style="width:200px">
+  {% include '__basis_sets.html' %}
+</select> 
+<label for="BasisSet">  Basis Set</label>
+
+</div>
+</fieldset>

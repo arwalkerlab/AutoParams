@@ -13,11 +13,11 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
         f.write("addions test Cl- 0\n")
         f.write("solvatebox test TIP3PBOX 12.0\n")
         f.write(f"saveamberparm test {prmtop} {inpcrd}\n")
-        f.write("run\n")
         f.write("quit\n")
 
     # Run tleap to obtain any missing parameters.
     S.call(f"tleap -f tleap.in > {leaplog}",shell=True)
+    S.call("rm tleap.in",shell=True)
     if all([G(prmtop),G(inpcrd)]):
         return False
     # Parse the tleap logfile to get the collection of missing parameters.

@@ -17,22 +17,27 @@ from .parametrize import *
 from .testing import *
 
 class MainJob():
-    def __init__(self,jobid):
+    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool):
         ### Internal variables.
         self._job_id = jobid
-        self._job_folder = UPLOAD_FOLDER + str(self._job_id)+ "/"
-        self._params_dir = self._job_folder+"Params/"
-        self._DB_folder = DATABASE_DIR + str(self._job_id)+ "/"
-        self.file_list = {}
-        self._opt_complete = False
-        self._resp_complete = False
-        self._param_complete = False
-        self._charge = 0
-        self._restype = "DNA"
+        self._charge = charge
+        self._restype = restype
+        self._multiplicity = multiplicity
         self._resname = "UNK"
         self._canon_smiles = ""
-        self._multiplicity = 1
         self._resp_charges = []
+
+        ### Folder Heirarchy
+        self._job_folder = UPLOAD_FOLDER + str(self._job_id)+ "/"
+        self._DB_folder = DATABASE_DIR + str(self._job_id)+ "/"
+        self._params_dir = self._job_folder+"Params/"
+        self.file_list = {}
+
+        ### Job Flags
+        self._override_db_check = db_override_bool
+        self._opt_complete = opt_bool
+        self._resp_complete = False
+        self._param_complete = False
         
         ### Initialization Functions
         os.makedirs(self._job_folder,exist_ok=True)
@@ -66,6 +71,9 @@ class MainJob():
             return False
         self._canon_smiles = PDBtoChemDraw(self.file_list["Original PDB"],self.file_list["ChemDraw"])
         S.call(f'cp {self.file_list["ChemDraw"]} {STATIC_DIR}{self.file_list["static_temp_png"]}',shell=True)
+        if self._override_db_check:
+            self.LogJobMessage("Overriding database check.")
+            return True
         RefreshDB()
         if CheckSMILESinDB(self._canon_smiles):
             self.LogJobMessage("Parameters already exist in database.")
@@ -79,6 +87,7 @@ class MainJob():
         self._resname = GetResName(self.file_list["Working PDB"])
         try:
             tmp = parmed.load_file(self.file_list["Working PDB"])
+            del tmp
             return True
         except:
             self.LogJobMessage("PDB file cleaning failed.  Unable to use PDB.")
@@ -87,13 +96,13 @@ class MainJob():
             return False
         
     def Optimize(self):
-        if not self._opt_complete:
-            OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity)
-            self.LogJobMessage("PDB optimized")
+        if self._opt_complete:
+            self.LogJobMessage("PDB optimization skipped.")
             self.LogJobMessage("<hr>")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         else:
-            self.LogJobMessage("PDB optimization skipped.")
+            OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity)
+            self.LogJobMessage("PDB optimized")
             self.LogJobMessage("<hr>")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         return True
@@ -114,6 +123,7 @@ class MainJob():
         GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname)
         os.chdir(MAIN_DIR)
         if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
+            S.call(f"rm -rf {self._params_dir}",shell=True)
             return True
         self.LogJobMessage("Parameter generation failure.")
         MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")

@@ -15,7 +15,7 @@
     <img src="{{url_for('static',filename='WalkerResearchPeptideLogo.png')}}" style="width: 500px;" >
 </p>
 <h1 style="text-align: center;">Running...</h1>
-
+<p style="text-align:center;"><b>Job ID: </b> {{ session['jobid'] }}</p>
 
 <p style="text-align:center;">
     <img src="{{url_for('static',filename=curr_job.file_list['static_temp_png'])}}" style="width: 500px;" >

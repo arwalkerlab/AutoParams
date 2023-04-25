@@ -1,2 +1,6 @@
 Database/
 TestFunctions/
+Application/database/
+Application/uploads/
+Application/static/
+Application/templates/logfiles/

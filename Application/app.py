@@ -3,14 +3,13 @@ sys.path.append("/opt/conda/envs/psi4flask/lib/python3.9/site-packages/")
 
 from utilities.utilities import *
 from utilities.main_job import *
+from utilities.initialize_server import InitializeApp
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "01123581321_Dockerized"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['DATABASE_FOLDER'] = DATABASE_DIR
-main_start_dir = os.getcwd()
-MAIN_UPLOAD_FOLDER = os.path.join(main_start_dir,"uploads/")
-RefreshDB()
+
+# Clean startup from utilities.initialize_server.py
+InitializeApp(app)
+
 
 ### Starting Page
 @app.route('/',methods=['GET', 'POST'])
@@ -18,16 +17,19 @@ def start_page():
     if request.method=="POST":
         jobid = random_job_identifier()
         session["jobid"] = jobid
-        CURRENT_JOBS[jobid] = MainJob(jobid)
-        CURRENT_JOBS[jobid]._charge = request.form.get('charge')
-        CURRENT_JOBS[jobid]._multiplicity = request.form.get('spin')
-        CURRENT_JOBS[jobid]._restype = request.form.get('moltype')
-        if request.form.get('optimize_job') == "on":
-            CURRENT_JOBS[jobid]._opt_complete = False
-        else:
-            CURRENT_JOBS[jobid]._opt_complete = True
-        print("Current optimization boolean: ",CURRENT_JOBS[jobid]._opt_complete)
-        continue_job = CURRENT_JOBS[jobid].UploadPDBFile(request.files['PDBfile'])
+        ### Collect Form Data
+        pdbfile = request.files['PDBfile']
+        optimize_bool = bool(request.form.get('optimize_job') == "on")
+        override_db_bool = bool(request.form.get('override_db') == "on")
+        charge = request.form.get('charge')
+        multiplicity = request.form.get('spin')
+        restype = request.form.get('moltype')
+        level_of_theory = request.form.get('level_of_theory')
+        basis_set = request.form.get('basis_set')
+        
+        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool)
+
+        continue_job = CURRENT_JOBS[jobid].UploadPDBFile(pdbfile)
         if not continue_job:
             new_logfile = f"logfiles/{session['jobid']}.html"
             S.call(f"touch templates/{new_logfile}",shell=True)

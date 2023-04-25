@@ -8,6 +8,7 @@ from .testing import *
 def GenerateParameters(file_list,respcharges,moltype,resname):
     MAKE_MOL2_FILE(file_list["Working PDB"],file_list["MOL2"],respcharges)
     missing_params = GetMissingParams(moltype,resname,file_list["MOL2"],file_list["LeapLog"])
+    GenerateFRCMODFile(LEAPRC_DICT[moltype],file_list["FRCMOD"],missing_params)
     orig_missing_params = missing_params
     while missing_params:
         for key,val in orig_missing_params.items():
