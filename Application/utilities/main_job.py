@@ -107,6 +107,7 @@ class MainJob():
             self.LogJobMessage("PDB optimized")
             self.LogJobMessage("<hr>")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
+            self._opt_complete = True
         return True
 
     def RESPCharges(self):

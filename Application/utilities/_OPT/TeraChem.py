@@ -44,7 +44,6 @@ def OptimizePDB(pdbfile,charge=0,mult=1,method="b3lyp/6-31gss"):
         f.write("""#!/bin/bash
 terachem -i opt.in 1> opt.out 2> opt.err
 if grep -q "Job finished:" opt.out; then
-    mv $MAINPDB ORIG_$MAINPDB
     OPTIMPDB=$(ls scr/optim.pdb)
     line1=$(grep -n "MODEL" $OPTIMPDB | tail -n 1 | grep -Eo '^[^:]+')
     line2=$(grep -n "ENDMDL" $OPTIMPDB | tail -n 1 | grep -Eo '^[^:]+')
