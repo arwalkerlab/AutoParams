@@ -21,10 +21,12 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
     if all([G(prmtop),G(inpcrd)]):
         return False
     # Parse the tleap logfile to get the collection of missing parameters.
-    missing_params={"BONDS":[],
+    missing_params={"MASSES":[],
+                    "BONDS":[],
                     "ANGLES":[],
                     "DIHEDRALS":[],
-                    "TORSIONS":[]}
+                    "TORSIONS":[],
+                    "NONBONDED":[]}
     for line in open(leaplog).readlines():
         if "No sp2 improper torsion term for" in line:
             missing_params["TORSIONS"].append(line.split()[-1])
@@ -45,8 +47,8 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
             [a1,a3] = sorted([a1,a3])            
             missing_params["ANGLES"].append(f"{a1:<2}-{a2:<2}-{a3:<2}")
 
-        elif "** No torsion terms for" in line:
-            [a1,a2,a3,a4] = line.replace("** No torsion terms for","").split("-")
+        elif "** No torsion terms for atom types:" in line:
+            [a1,a2,a3,a4] = line.replace("** No torsion terms for atom types:","").split("-")
             a1 = a1.strip()
             a2 = a2.strip()
             a3 = a3.strip()
@@ -54,6 +56,11 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
             if [a3,a2] == sorted([a2,a3]):
                 [a1,a2,a3,a4] = [a4,a3,a2,a1]
             missing_params["DIHEDRALS"].append(f"{a1:<2}-{a2:<2}-{a3:<2}-{a4:<2}")
+        
+        elif "could not find vdW (or other) parameters for type" in line:
+            a1 = line.strip().split()[-1].replace("(","").replace(")","")
+            missing_params["MASSES"].append(f"{a1:<2}")
+            missing_params["NONBONDED"].append(f"{a1:<2}")
     
     # Reduce the lists to unique sets of terms - no need to define the same parameter multiple times.
     for key in missing_params.keys():

@@ -1,0 +1,11 @@
+source leaprc.RNA.OL3
+source leaprc.water.tip3p
+L18 = loadmol2 /home/mark/DockerApps/TeraChemAutoParams/Application/uploads/1d50decaa960479784b962762645de59/new_18_compound_alone_copy.mol2
+loadamberparams /home/mark/DockerApps/TeraChemAutoParams/Application/uploads/1d50decaa960479784b962762645de59/new_18_compound_alone_copy.frcmod
+test = loadpdb /home/mark/DockerApps/TeraChemAutoParams/Application/uploads/1d50decaa960479784b962762645de59/new_18_compound_alone_copy.pdb
+addions test Na+ 0
+addions test Cl- 0
+solvatebox test TIP3PBOX 12.0
+saveamberparm test /home/mark/DockerApps/TeraChemAutoParams/Application/uploads/1d50decaa960479784b962762645de59/new_18_compound_alone_copy.prmtop /home/mark/DockerApps/TeraChemAutoParams/Application/uploads/1d50decaa960479784b962762645de59/new_18_compound_alone_copy.inpcrd
+run
+quit

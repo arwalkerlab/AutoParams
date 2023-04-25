@@ -1,12 +1,8 @@
-name: psi4flask
+name: tc-autoparams-flask
 channels:
   - conda-forge
-  - psi4
 dependencies:
   - python=3.8
-  - psi4
-  - psiresp-base
-  - qcelemental
   - numpy
   - rdkit
   - openbabel

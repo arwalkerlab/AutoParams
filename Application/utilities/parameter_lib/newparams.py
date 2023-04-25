@@ -11,10 +11,11 @@ BASIC_ATOM_TYPES   = {"C_sp":["CZ","CY"],
                       "Cl":["Cl"],
                       "Br":["Br"],
                       "I":["I "],
-                      "S":["S ","SH"],
+                      "S":["S ","SH","SO","SS"],
                       "P":["P "],
                       "EP":["EP"]
                      }
+
 
 BOND_LENGTH_DICT = { 'H-O_sb':0.970, 'C_sp2-H':1.120, 'C_sp3-H':1.120, 
                      'C_sp-H':1.120, 'H-N_sp2':1.010, 'H-N_sp3':1.010, 
@@ -297,6 +298,9 @@ def CalcAngleForceConstant(angle):
         return ANGLE_FORCE_CONST_DICT[a2]
     else:
         return 50.0
+    
+def NewMass(mass_string):
+    return f"{mass_string:<2} 999.999\n"
 
 def NewBond(bond_string):
     bond_length = CalcBondLength(bond_string)
@@ -347,3 +351,6 @@ def NewDihedral(dihe_string):
 
 def NewTorsion(torsion_string):
     [a1,a2,a3,a4]=torsion_string.split("-")
+
+def NewNonBonded(nonbonded_string):
+    return f"{nonbonded_string:<2}          2.00    0.5000\n"

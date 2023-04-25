@@ -1,10 +1,12 @@
 import os
 this_folder = os.path.dirname(os.path.abspath(__file__))
 
+MASSES_LIB_FILE = this_folder+"/masses.txt"
 BONDS_LIB_FILE = this_folder+"/bonds.txt"
 ANGLES_LIB_FILE = this_folder+"/angles.txt"
 DIHEDRALS_LIB_FILE = this_folder+"/dihedrals.txt"
 TORSIONS_LIB_FILE = this_folder+"/torsions.txt"
+NONBONDED_LIB_FILE = this_folder+"/nonbonded.txt"
 
 def CleanBondsLibraryFile():
     new_file_dict = []
@@ -93,10 +95,18 @@ def CleanTorsionsLibraryFile():
 
 def GenerateParameterDictionaries():
     # Initialize dictionaries of bonds, angles, dihedrals, and torsions that may be missing.
+    known_masses_dict    = {}
     known_bonds_dict     = {}
     known_angles_dict    = {}
     known_dihedrals_dict = {}
     known_torsions_dict  = {}
+    known_nonbonded_dict = {}
+    # Process known masses from local masses.txt file
+    for line in open(MASSES_LIB_FILE).readlines():
+        if line.strip()=="":
+            continue
+        key = line[:2]
+        known_masses_dict[key] = line
 
     # Process known bonds from local bonds.txt file
     for line in open(BONDS_LIB_FILE).readlines():
@@ -132,4 +142,16 @@ def GenerateParameterDictionaries():
         key = line[:11]
         known_torsions_dict[key] = line
 
-    return {"BONDS":known_bonds_dict,"ANGLES":known_angles_dict,"DIHEDRALS":known_dihedrals_dict,"TORSIONS":known_torsions_dict}
+    # Process known nonbonded from local nonbonded.txt file
+    for line in open(NONBONDED_LIB_FILE).readlines():
+        if line.strip()=="":
+            continue
+        key = line[:2]
+        known_nonbonded_dict[key] = line
+
+    return {"MASSES":known_masses_dict,
+            "BONDS":known_bonds_dict,
+            "ANGLES":known_angles_dict,
+            "DIHEDRALS":known_dihedrals_dict,
+            "TORSIONS":known_torsions_dict,
+            "NONBONDED":known_nonbonded_dict}

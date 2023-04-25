@@ -1,0 +1,15 @@
+coordinates         /home/mark/DockerApps/TeraChemAutoParams/Application/uploads/1e5498dc5c894fd0a5647b160a554732/new_18_compound_alone_copy.pdb
+charge              -5
+spinmult            1
+basis               6-31gss
+method              b3lyp
+convthre            1e-7
+threall             1e-14
+precision           mixed
+maxit               200
+scf                 diis+a
+gpus                1
+gpumem              256
+scrdir              scr/
+run                 energy
+resp                yes

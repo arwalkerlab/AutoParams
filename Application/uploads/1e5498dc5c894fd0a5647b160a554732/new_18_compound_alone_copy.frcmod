@@ -1,0 +1,17 @@
+new_18_compound_alone_copy, use with  leaprc.RNA.OL3
+
+MASS
+SO 32.06
+
+BOND
+
+ANGLE
+
+DIHE
+
+IMPROPER
+
+NONBON
+SO          2.0000  0.2500             same as ss
+
+

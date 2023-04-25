@@ -1,11 +1,13 @@
 ### STATIC VARIABLES ONLY ###
-
+import os
 # Location variables
-MAIN_DIR = '/app/'
-UPLOAD_FOLDER = '/app/uploads/'
-STATIC_DIR = '/app/static/'
-DATABASE_DIR = '/app/database/'
-TEMPLATES_DIR = '/app/templates/'
+parent = os.path.dirname
+MAIN_DIR = parent(parent(__file__))
+print(MAIN_DIR)
+UPLOAD_FOLDER = MAIN_DIR+'/uploads/'
+STATIC_DIR = MAIN_DIR+'/static/'
+DATABASE_DIR = MAIN_DIR+'/database/'
+TEMPLATES_DIR = MAIN_DIR+'/templates/'
 
 # Extension variables
 # ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'pdb'}

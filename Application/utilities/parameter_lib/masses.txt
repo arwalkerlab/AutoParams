@@ -1,0 +1,64 @@
+C  12.01         0.616  !            sp2 C carbonyl group 
+CA 12.01         0.360               sp2 C pure aromatic (benzene)
+CB 12.01         0.360               sp2 aromatic C, 5&6 membered ring junction
+CC 12.01         0.360               sp2 aromatic C, 5 memb. ring HIS
+CD 12.01         0.360               sp2 C atom in the middle of: C=CD-CD=C
+CI 12.01                             parmbsc0
+CK 12.01         0.360               sp2 C 5 memb.ring in purines (dA,dG)
+CP 12.01         0.360               sp2 C 5 memb.ring in purines (G)
+CM 12.01         0.360               sp2 C  pyrimidines in pos. 5 & 6 (dT,dC)
+CS 12.01         0.360               sp2 C  pyrimidines in pos. 5 & 6 (U)
+CN 12.01         0.360               sp2 C aromatic 5&6 memb.ring junct.(TRP)
+CQ 12.01         0.360               sp2 C in 5 mem.ring of purines between 2 N
+CR 12.01         0.360               sp2 arom as CQ but in HIS
+CT 12.01         0.878               sp3 aliphatic C
+CV 12.01         0.360               sp2 arom. 5 memb.ring w/1 N and 1 H (HIS)
+CW 12.01         0.360               sp2 arom. 5 memb.ring w/1 N-H and 1 H (HIS)
+C* 12.01         0.360               sp2 arom. 5 memb.ring w/1 subst. (TRP)
+CX 12.01         0.360               protein C-alpha (new to ff10)
+CY 12.01         0.360               nitrile C (Howard et al.JCC,16,243,1995)
+CZ 12.01         0.360               sp C (Howard et al.JCC,16,243,1995)
+C5 12.01         0.360               sp2 C 5 memb.ring in purines (A)
+C4 12.01         0.360               sp2 C  pyrimidines in pos. 5 & 6 (C)
+C0 40.08                             calcium
+H  1.008         0.161               H bonded to nitrogen atoms
+HC 1.008         0.135               H aliph. bond. to C without electrwd.group
+H1 1.008         0.135               H aliph. bond. to C with 1 electrwd. group
+H2 1.008         0.135               H aliph. bond. to C with 2 electrwd.groups
+H3 1.008         0.135               H aliph. bond. to C with 3 eletrwd.groups
+HA 1.008         0.167               H arom. bond. to C without elctrwd. groups
+H4 1.008         0.167               H arom. bond. to C with 1 electrwd. group
+H5 1.008         0.167               H arom.at C with 2 elctrwd. gr,+HCOO group
+HO 1.008         0.135               hydroxyl group
+HS 1.008         0.135               hydrogen bonded to sulphur (pol?)
+HW 1.008         0.000               H in TIP3P water
+HP 1.008         0.135               H bonded to C next to positively charged gr
+HZ 1.008         0.161               H bond sp C (Howard et al.JCC,16,243,1995)
+F  19.00         0.320               fluorine (not fluoride!)
+Cl 35.45         1.910               chlorine  (Applequist) (not chloride!)
+Br 79.90         2.880               bromine  (Applequist) (not bromide!)
+I  126.9         4.690               iodine   (Applequist) (not iodide!)
+MG 24.305        0.120               magnesium
+N  14.01         0.530               sp2 nitrogen in amide groups
+NA 14.01         0.530               sp2 N in 5 memb.ring w/H atom (HIS)
+NB 14.01         0.530               sp2 N in 5 memb.ring w/LP (HIS,ADE,GUA)
+NC 14.01         0.530               sp2 N in 6 memb.ring w/LP (ADE,GUA)
+N2 14.01         0.530               sp2 N in amino groups
+N3 14.01         0.530               sp3 N for charged amino groups (Lys, etc)
+NT 14.01         0.530               sp3 N for amino groups amino groups 
+N* 14.01         0.530               sp2 N 
+NY 14.01         0.530               nitrile N (Howard et al.JCC,16,243,1995)
+O  16.00         0.434               carbonyl group oxygen
+O2 16.00         0.434               carboxyl and phosphate group oxygen
+OW 16.00         0.000               oxygen in TIP3P water
+OH 16.00         0.465               oxygen in hydroxyl group
+OS 16.00         0.465               ether and ester oxygen
+OP 16.00         0.465               2- phosphate oxygen
+P  30.97         1.538               phosphate,pol:JACS,112,8543,90,K.J.Miller
+S  32.06         2.900               S in disulfide linkage,pol:JPC,102,2399,98
+SH 32.06         2.900               S in cystine
+SO 32.06
+SS 32.06
+CU 63.55                             copper
+FE 55.00                             iron
+Se 78.96

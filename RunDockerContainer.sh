@@ -26,10 +26,10 @@ docker build --tag $IMAGENAME .
 
 
 ###### Interactive Container ######
-# docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
+docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
 
 ###### Stand-alone Container ######
-docker run --network=host --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
+# docker run --network=host --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
 
 #### Cleanup on container exit ####
 # Purge the container

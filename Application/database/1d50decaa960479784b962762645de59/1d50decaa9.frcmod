@@ -1,0 +1,42 @@
+new_18_compound_alone_copy, use with  leaprc.RNA.OL3
+
+MASS
+SO 32.06
+
+BOND
+NT-SO  300.00   1.500
+O -SO  300.00   1.500
+C -N2  450.00   1.400
+
+ANGLE
+CT-C -N2    70.0      118.300
+N2-C -O     80.0      121.725
+O -SO-O    110.8      111.737
+CT-NT-SO    80.8      109.500
+NT-SO-O    110.8      111.737
+CA-CA-N2    70.0      119.121
+H -NT-SO    80.8      109.500
+C -N2-H     50.0      121.636
+C -N2-CA    70.0      114.595
+
+DIHE
+H -NT-SO-O    1    0.000         0.000          -1.
+H -NT-SO-O    1    1.490         0.000          -2.
+H -NT-SO-O    1    0.156         0.000          -3.
+H -NT-SO-O    1    0.000         0.000           4.
+CT-C -N2-H    1    0.000       180.000           2.0
+CT-NT-SO-O    1    0.000         0.000          -1.
+CT-NT-SO-O    1    1.490         0.000          -2.
+CT-NT-SO-O    1    0.156         0.000          -3.
+CT-NT-SO-O    1    0.000         0.000           4.
+O -C -N2-H    1    2.50        180.0            -2. 
+O -C -N2-H    1    2.00          0.0             1.
+CT-C -N2-CA   1    0.000       180.000           2.0
+O -C -N2-CA   1    0.000       180.000           2.0
+
+IMPROPER
+
+NONBON
+SO          2.0000  0.2500             same as ss
+
+

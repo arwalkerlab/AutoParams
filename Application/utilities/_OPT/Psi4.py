@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import psi4
 import parmed as pm
-from utilities.defaults import *
+from ..defaults import *
 
 def OptimizePDB(pdbfile,charge=0,mult=1,method="scf/6-31g**"):
     psi4.set_memory(AVAILABLE_PSI4_MEMORY)
