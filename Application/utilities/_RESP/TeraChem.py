@@ -47,11 +47,11 @@ def readRESPcharges(filename):
             charges.append(str(charge))
     return charges
 
-def GetRESPCharges(pdbfile,charge,mult,jobfolder):
+def GetRESPCharges(pdbfile,charge,mult,jobfolder,level_of_theory="b3lyp",basis_set="6-31gss"):
     ## Terachem Version
     currdir = os.getcwd()
     os.chdir(jobfolder)
-    WriteTCRESP(coordinates=pdbfile,charge=charge,spinmult=mult)
+    WriteTCRESP(coordinates=pdbfile,charge=charge,spinmult=mult,method=level_of_theory,basis=basis_set)
     S.call("terachem -i resp.in 1> resp.out 2> resp.err",shell=True)
     resp_charges = readRESPcharges("resp.out")
     os.chdir(currdir)

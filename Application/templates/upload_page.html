@@ -26,21 +26,21 @@
 <fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
 <legend>PDB Structure Information</legend>
   <!-- label for="var1" is the same as input id="var1", and flask's request.files['var2'] is input name='var2' -->
-    <div style="padding: 1em;">
-    <label for="PDBid">Select PDB to parametrize: </label>
-    <input type="file" id="PDBid" name="PDBfile" accept=".pdb" required>
+    <div>
+    <label for="PDBid" style="width:200px">Upload PDB </label>
+    <input type="file" id="PDBid" name="PDBfile" accept=".pdb" required style="width:300px">
     </div>
-    <!-- <br> -->
-    <div style="padding: 1em;">
-      <label for="charge">Charge (integer)</label>
-    <input type="number" id="charge" name="charge" value=0 required size="10">
+    <br>
+    <div>
+    <input type="number" id="charge" name="charge" value=0 required size="10" style="width:100px">
+    <label for="charge" style="width:200px">Charge </label>
     </div>
-    <div style="padding: 1em;">
-      <label for="spin">Spin Multiplicity (integer)</label>
-    <input type="number" id="spin" name="spin" value=1 required size="10">
+    <div>
+    <input type="number" id="spin" name="spin" value=1 required size="10" style="width:100px">
+    <label for="spin" style="width:200px">Multiplicity</label>
     </div>
-    <!-- <br> -->
-    <div style="padding: 1em;">
+    <br>
+    <div>
       <legend>Molecule Type:</legend>
     <div>
       <input type="radio" id="RNA" name="moltype" value="RNA"
@@ -61,20 +61,14 @@
       <label for="Carbohydrate">Carbohydrate</label>
     </div> -->
   </div>
-  <!-- <br> -->
-  <!-- <div style="padding: 1em;">
-    <label for="resid">PDB ResID (max 3 characters):</label>
-    <input type="text" id="resid" name="resid" value="UNK" required minlength="1" maxlength="3" size="10">
-  </div> -->
   
 </fieldset>
 
 <fieldset style="border-width:3px; border-style:solid; border-color:#78E2A0; padding: 1em;">
-  <legend>Override Database Check</legend>
-  Normally, submitted structures are checked against the database before running optimizations and parametrizations.<br>
-  If you wish to override this check and force a new calculations, <b>check</b> this box.<br>
   <input type="checkbox" id="OverrideDB" name="override_db">
-  <label for="OverrideDB">Override Database Check</label>
+  <label for="OverrideDB"><b>Override Database Check:</b>  Normally, submitted structures are checked 
+    against the database before running optimizations and parametrizations. If you wish to override 
+    this check and force a new calculation, check this box.</label>
 </fieldset>
 
 <!-- OPTIMIZATION SETTINGS -->

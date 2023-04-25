@@ -17,7 +17,7 @@ from .parametrize import *
 from .testing import *
 
 class MainJob():
-    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool):
+    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool,level_of_theory,basis_set):
         ### Internal variables.
         self._job_id = jobid
         self._charge = charge
@@ -26,6 +26,8 @@ class MainJob():
         self._resname = "UNK"
         self._canon_smiles = ""
         self._resp_charges = []
+        self._level_of_theory = level_of_theory
+        self._basis_set = basis_set
 
         ### Folder Heirarchy
         self._job_folder = UPLOAD_FOLDER + str(self._job_id)+ "/"
@@ -101,14 +103,14 @@ class MainJob():
             self.LogJobMessage("<hr>")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         else:
-            OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity)
+            OptimizePDB(self.file_list["Working PDB"],charge=self._charge,mult=self._multiplicity,method=f"{self._level_of_theory}/{self._basis_set}")
             self.LogJobMessage("PDB optimized")
             self.LogJobMessage("<hr>")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
         return True
 
     def RESPCharges(self):
-        self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder)
+        self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder,level_of_theory=self._level_of_theory,basis_set=self._basis_set)
         if not self._resp_charges:
             self.LogJobMessage("Unable to generate RESP charges.")
             self.LogJobMessage("<hr>")

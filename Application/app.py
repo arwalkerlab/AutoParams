@@ -17,6 +17,7 @@ def start_page():
     if request.method=="POST":
         jobid = random_job_identifier()
         session["jobid"] = jobid
+
         ### Collect Form Data
         pdbfile = request.files['PDBfile']
         optimize_bool = bool(request.form.get('optimize_job') == "on")
@@ -26,9 +27,11 @@ def start_page():
         restype = request.form.get('moltype')
         level_of_theory = request.form.get('level_of_theory')
         basis_set = request.form.get('basis_set')
-        
-        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool)
 
+        ### Initialize Job
+        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool,level_of_theory,basis_set)
+
+        ### Upload PDB and begin processing.
         continue_job = CURRENT_JOBS[jobid].UploadPDBFile(pdbfile)
         if not continue_job:
             new_logfile = f"logfiles/{session['jobid']}.html"
@@ -40,11 +43,6 @@ def start_page():
                 prmtop = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["PRMTOP"]
                 inpcrd = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["INPCRD"]
                 tleapinput = UPLOAD_FOLDER + session["jobid"] + "/tleap.in"
-                print(frcmod)
-                print(mol2)
-                print(prmtop)
-                print(inpcrd)
-                print(tleapinput)
                 if G(frcmod):
                     f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">FRCMOD</a><br>""")
                 if G(mol2):
@@ -97,11 +95,6 @@ def show_finished():
         prmtop = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["PRMTOP"]
         inpcrd = UPLOAD_FOLDER + CURRENT_JOBS[session["jobid"]].file_list["INPCRD"]
         tleapinput = UPLOAD_FOLDER + session["jobid"] + "/tleap.in"
-        print(frcmod)
-        print(mol2)
-        print(prmtop)
-        print(inpcrd)
-        print(tleapinput)
         if G(frcmod):
             f.write("""<a href="{{ url_for('download', filename=curr_job.file_list['FRCMOD']) }}">FRCMOD</a><br>""")
         if G(mol2):
