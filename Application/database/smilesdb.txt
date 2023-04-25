@@ -5,3 +5,10 @@ O=C(Nc1ccccc1)[C@H]1O[C@H](O[C@@H]2[C@@H](O)[C@H](O[C@H]3O[C@H](CNS(O)(O)O)[C@@H
 CC(=O)c1cc(Nc2cn([C@H]3O[C@H](CO)[C@@H](O)[C@H]3O)c(=O)nc2N)c(C(C)=O)cc1N
 Cc1ccc(O)cc1
 N#CC(C#N)=Cc1ccc(-c2cccc(-c3nc4ccccc4s3)c2O)s1
+CN(C)c1c2ccccc2cc2ccccc12
+CN1/C(=C/C/C=C2/N(CCCCCC(=O)O)c3ccc(S(O)(O)O)cc3C2(C)C)C(C)(C)c2cc(S(O)(O)O)ccc21
+Oc1c(-c2cccs2)cccc1-c1nc2ccccc2s1
+CCCN1/C(=C\C=C(\C/C=C2/N(CCC)c3ccccc3C2(C)C)c2ccc3ccccc3n2)C(C)(C)c2ccccc21
+CCCN1/C(=C\C/C=C/C=C2/N(CCC)c3ccccc3C2(C)C)C(C)(C)c2ccccc21
+CN(C)C1=C[C@@H]2Sc3cc(N(C)C)ccc3N=C2C=C1
+O=C(O)COc1cccc(OCC(=O)O)c1C1=C2CC=C(N3CCCCC3)C=C2Oc2cc(N3CCCCC3)ccc21

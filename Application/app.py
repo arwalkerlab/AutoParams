@@ -5,11 +5,10 @@ from utilities.utilities import *
 from utilities.main_job import *
 from utilities.initialize_server import InitializeApp
 
-app = Flask(__name__)
+app = Flask(__name__, instance_path=DATABASE_DIR)
 
 # Clean startup from utilities.initialize_server.py
 InitializeApp(app)
-
 
 ### Starting Page
 @app.route('/',methods=['GET', 'POST'])
@@ -20,14 +19,8 @@ def start_page():
 
         ### Collect Form Data
         pdbfile = request.files['PDBfile']
-        if request.form.get('optimize_job') == "on":
-            optimize_bool = False
-        else:
-            optimize_bool = True
-        if request.form.get('override_db') == "on":
-            override_db_bool = True
-        else:
-            override_db_bool = False
+        optimize_bool = bool(request.form.get('optimize_job') != "on")
+        override_db_bool = bool(request.form.get('override_db') == "on")
         charge = request.form.get('charge')
         multiplicity = request.form.get('spin')
         restype = request.form.get('moltype')

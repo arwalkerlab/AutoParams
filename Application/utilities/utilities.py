@@ -38,7 +38,9 @@ def RefreshDB():
     RenewSmilesDB()
     os.chdir(DATABASE_DIR)
     with open(TEMPLATES_DIR+"__db_dataset.html","w") as f:
-        for file_loc in G("*/"):
+        all_db_folders = G("*/")
+        all_db_folders.sort(key=lambda x: os.path.getmtime(x))
+        for file_loc in all_db_folders:
             f.write(DataBaseEntry(file_loc))
     os.chdir(MAIN_DIR)
 
@@ -55,7 +57,7 @@ def DataBaseEntry(location):
     DATABASE_MOLS_SEEN.append(smiles)
     if G(location+"*.png"):
         chemdraw = G(location+"*.png")[0]
-        html_code+=f"<img src='database/{chemdraw}' width=\"98%\" title=SMILES: {smiles}><br>\n"
+        html_code+=f"<img src='database/{chemdraw}' width=\"98%\" title=\"SMILES: {smiles}\"><br>\n"
     if G(location+"settings.txt"):
         html_code += "<a href=\"{{ url_for('db_download', filename=\""
         html_code +=G(location+"settings.txt")[0]
