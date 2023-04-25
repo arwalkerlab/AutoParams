@@ -20,8 +20,14 @@ def start_page():
 
         ### Collect Form Data
         pdbfile = request.files['PDBfile']
-        optimize_bool = bool(request.form.get('optimize_job') == "on")
-        override_db_bool = bool(request.form.get('override_db') == "on")
+        if request.form.get('optimize_job') == "on":
+            optimize_bool = False
+        else:
+            optimize_bool = True
+        if request.form.get('override_db') == "on":
+            override_db_bool = True
+        else:
+            override_db_bool = False
         charge = request.form.get('charge')
         multiplicity = request.form.get('spin')
         restype = request.form.get('moltype')
