@@ -28,7 +28,7 @@ def SingleResidue(pdbfile):
             x = float(line[27:38].strip())
             y = float(line[39:46].strip())
             z = float(line[47:54].strip())
-            element=line[77:].strip()
+            element=line[75:].strip()
             if element not in element_count.keys():
                 element_count[element] = 0
             element_count[element] += 1

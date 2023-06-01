@@ -1,6 +1,19 @@
 from ..utilities import *
 
-def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop",inpcrd="test.inpcrd",pdb="param.pdb"):
+def tleap_pdb_load(pdbfile):
+    return f"test = loadpdb {pdbfile}\n"
+
+def tleap_sequence_load(moltype,resname):
+    sequence = {"DNA":"test = sequence { DA5 "+resname+" DA3 }\n",
+               "RNA":"test = sequence { A5 "+resname+" A3 }\n",
+               "Protein":"test = sequence { NALA "+resname+" CALA }\n"}
+    if moltype not in sequence.keys():
+        print("test = sequence { "+resname+" }\n")
+        return "test = sequence { "+resname+" }\n"
+    print(sequence[moltype])
+    return sequence[moltype]
+
+def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop",inpcrd="test.inpcrd",pdb="param.pdb",connections=[]):
     # Write the tleap.in input file with the appropriate BASE forcefield for the moltype (RNA,DNA,Protein,Carbohydrate,etc.)
     with open("tleap.in","w") as f:
         f.write(LEAPRC_DICT[moltype])
@@ -8,7 +21,10 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
         f.write(f"{resname} = loadmol2 {mol2}\n")
         if all([frcmod != "",G(frcmod)]):
             f.write(f"loadamberparams {frcmod}\n")
-        f.write(f"test = loadpdb {pdb}\n")
+        if any([connections == [],connections==["0","0"]]):
+            f.write(tleap_pdb_load(pdb))
+        else:
+            f.write(tleap_sequence_load(moltype,resname))
         f.write("addions test Na+ 0\n")
         f.write("addions test Cl- 0\n")
         f.write("solvatebox test TIP3PBOX 12.0\n")
@@ -17,7 +33,7 @@ def GetMissingParams(moltype,resname,mol2,leaplog,frcmod="",prmtop="test.prmtop"
 
     # Run tleap to obtain any missing parameters.
     S.call(f"tleap -f tleap.in > {leaplog}",shell=True)
-    S.call("rm tleap.in",shell=True)
+    # S.call("rm tleap.in",shell=True)
     if all([G(prmtop),G(inpcrd)]):
         return False
     # Parse the tleap logfile to get the collection of missing parameters.

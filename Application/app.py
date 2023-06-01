@@ -26,9 +26,19 @@ def start_page():
         restype = request.form.get('moltype')
         level_of_theory = request.form.get('level_of_theory')
         basis_set = request.form.get('basis_set')
-
+        headconnect = request.form.get('headconnect')
+        tailconnect = request.form.get('tailconnect')
+        connections = []
+        if headconnect == "NONE":
+            connections.append("0")
+        else:
+            connections.append(headconnect)
+        if tailconnect == "NONE":
+            connections.append("0")
+        else:
+            connections.append(tailconnect)
         ### Initialize Job
-        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool,level_of_theory,basis_set)
+        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool,level_of_theory,basis_set,connections)
 
         ### Upload PDB and begin processing.
         continue_job = CURRENT_JOBS[jobid].UploadPDBFile(pdbfile)

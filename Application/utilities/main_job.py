@@ -17,7 +17,7 @@ from .parametrize import *
 from .testing import *
 
 class MainJob():
-    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool,level_of_theory,basis_set):
+    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool,level_of_theory,basis_set,connections):
         ### Internal variables.
         self._job_id = jobid
         self._charge = charge
@@ -28,6 +28,7 @@ class MainJob():
         self._resp_charges = []
         self._level_of_theory = level_of_theory
         self._basis_set = basis_set
+        self._connections = connections
 
         ### Folder Heirarchy
         self._job_folder = UPLOAD_FOLDER + str(self._job_id)+ "/"
@@ -123,7 +124,7 @@ class MainJob():
         os.makedirs(self._params_dir,exist_ok=True)
         S.call(f"cp {self.file_list['Working PDB']} {self._params_dir}/param.pdb",shell=True)
         os.chdir(self._params_dir)
-        GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname)
+        GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname,self._connections)
         os.chdir(MAIN_DIR)
         if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
             S.call(f"rm -rf {self._params_dir}",shell=True)
@@ -140,7 +141,8 @@ class MainJob():
                             frcmod = self.file_list["FRCMOD"],
                             prmtop=self.file_list["PRMTOP"],
                             inpcrd=self.file_list["INPCRD"],
-                            pdb=self.file_list["Working PDB"])
+                            pdb=self.file_list["Working PDB"],
+                            connections=self._connections)
         
         if not curr_miss_params:
             return True
