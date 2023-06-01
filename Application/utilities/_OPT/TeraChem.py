@@ -47,7 +47,7 @@ if grep -q "Job finished:" opt.out; then
     OPTIMPDB=$(ls scr/optim.pdb)
     line1=$(grep -n "MODEL" $OPTIMPDB | tail -n 1 | grep -Eo '^[^:]+')
     line2=$(grep -n "ENDMDL" $OPTIMPDB | tail -n 1 | grep -Eo '^[^:]+')
-    tail -n +$((line1+1)) $OPTIMPDB | head -n $((line2-line1-1)) > $MAINPDB
+    tail -n +$((line1+1)) $OPTIMPDB | head -n $((line2-line1-1)) > """+str(os.path.abspath(pdbfile))+"""
     rm -rf ./scr/
 fi
 """)
