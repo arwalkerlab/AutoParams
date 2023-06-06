@@ -4,3 +4,4 @@ Application/database/
 Application/uploads/
 Application/static/
 Application/templates/logfiles/
+Application/tleap.in

@@ -75,3 +75,5 @@ COc1ccc2cccc3c4c(OC)c(N5CN([C@H]6C[C@H](O)[C@@H](COP(=O)(O)O)O6)c6nc(N)[nH]c(=O)
 CC(=O)c1cc(Nc2cc(N)nc(=O)n2[C@H]2C[C@H](O)[C@@H](CO)O2)c(C(C)=O)cc1N
 CSCC[C@@H](N)C1=N[C@H](CC2C=CC(=O)C=C2)C(=O)N1CC=O
 COC(=O)[C@@]12CCC(C)(C)C[C@@H]1C1=CC[C@H]3[C@]4(C)CC[C@@H](O[C@@H]5O[C@H](COS(O)(O)O)[C@H](O[C@@H]6O[C@H](C(=O)O)[C@@H](O[C@H]7O[C@H](COS(O)(O)O)[C@@H](O)[C@H](O)[C@H]7NS(O)(O)O)[C@H](O)[C@H]6O)[C@H](O)[C@H]5NS(O)(O)O)C(C)(C)[C@@H]4CC[C@]3(C)[C@]1(C)CC2
+CC(=O)c1cc(Nc2nc3c(n2[C@@H]2O[C@H](CO)C(O)=C2O)NC=N[C@@H]3N)c(C(C)=O)cc1N
+CC(=O)c1cc(N)c(C(=O)CC2=N[C@@H](N)c3ncn(C4=C(O)[C@@H](O)[C@H](CO)O4)c3N2)cc1N
