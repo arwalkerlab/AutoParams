@@ -16,7 +16,6 @@ def start_page():
     if request.method=="POST":
         jobid = random_job_identifier()
         session["jobid"] = jobid
-
         ### Collect Form Data
         pdbfile = request.files['PDBfile']
         optimize_bool = bool(request.form.get('optimize_job') != "on")
