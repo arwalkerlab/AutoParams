@@ -8,6 +8,8 @@ UPLOAD_FOLDER = MAIN_DIR+'/uploads/'
 STATIC_DIR = MAIN_DIR+'/static/'
 DATABASE_DIR = MAIN_DIR+'/database/'
 TEMPLATES_DIR = MAIN_DIR+'/templates/'
+LOGFILES_DIR = TEMPLATES_DIR+'logfiles/'
+os.makedirs(LOGFILES_DIR,exist_ok=True)
 
 # Extension variables
 # ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'pdb'}
@@ -26,4 +28,4 @@ AVAILABLE_PSI4_MEMORY="4096 MB"
 LEAPRC_DICT = {"DNA":"source leaprc.DNA.OL15\n",
                "RNA":"source leaprc.RNA.OL3\n",
                "Protein":"source leaprc.protein.ff14SB\n",
-               "Carbohydrate":"source leaprc.GLYCAM_06j-1\nsource leaprc.protein.ff14SB\n"}
+               "Carbohydrate":"source leaprc.GLYCAM_06j-1\n"}

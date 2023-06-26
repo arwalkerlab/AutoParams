@@ -12,7 +12,9 @@ def GenerateParameters(file_list,respcharges,moltype,resname,connections=[]):
     missing_params = GetMissingParams(moltype,resname,file_list["MOL2"],file_list["LeapLog"],connections=connections)
     GenerateFRCMODFile(LEAPRC_DICT[moltype],file_list["FRCMOD"],missing_params)
     orig_missing_params = missing_params
+    i = 0
     while missing_params:
+        i+=1
         for key,val in orig_missing_params.items():
             for xx in val:
                 if xx not in missing_params[key]:
@@ -23,4 +25,8 @@ def GenerateParameters(file_list,respcharges,moltype,resname,connections=[]):
         missing_params = GetMissingParams(moltype,resname,file_list["MOL2"],file_list["LeapLog"],frcmod=file_list["FRCMOD"],connections=connections)
         if orig_missing_params == missing_params:
             return
+        print(missing_params)
+        if i > 3:
+            return
+        
     return

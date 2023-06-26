@@ -87,3 +87,4 @@ CC(=O)c1cc(NNc2nc3c(ncn3[C@@H]3O[C@H](CO)[C@@H](O)[C@H]3O)c(=O)[nH]2)c(C(C)=O)cc
 CC(=O)c1cc(NNc2nc3c(ncn3[C@H]3C[C@H](O)[C@@H](CO)O3)c(=O)[nH]2)c(C(C)=O)cc1N
 CC(=O)c1cc(N)c(C(=O)CNc2nc3c(ncn3[C@H]3C[C@H](O)[C@@H](CO)O3)c(=O)[nH]2)cc1N
 CC(=O)c1cc(N)c(C(=O)CNc2nc3c(ncn3[C@@H]3O[C@H](CO)[C@@H](O)[C@H]3O)c(=O)[nH]2)cc1N
+O=C(Nc1ccccc1)[C@H]1O[C@@H](O[C@H]2[C@@H](NS(O)(O)O)C[C@@H](NS(O)(O)O)[C@@H](O[C@H]3C[C@@H](CNS(O)(O)O)[C@@H](O)C[C@H]3NS(O)(O)O)[C@H]2O)[C@@H](O)[C@@H](NS(O)(O)O)[C@H]1O

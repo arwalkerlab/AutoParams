@@ -1,4 +1,6 @@
-conda activate tc-autoparams-flask
+
+#conda activate tc-autoparams-flask
+conda activate psi4flask
 source /opt/intel/oneapi/setvars.sh
 module load TeraChem/1.9
 cd Application/

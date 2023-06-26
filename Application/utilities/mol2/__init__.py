@@ -1,5 +1,5 @@
 from ..utilities import *
-from glycam_atom_types import *
+from .glycam_atom_types import *
 
 def MAKE_MOL2_FILE(pdbfile,mol2file,respcharges,connections):
     ### Generate the mol2 file.
