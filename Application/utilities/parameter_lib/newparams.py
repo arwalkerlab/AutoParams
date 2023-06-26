@@ -1,21 +1,20 @@
-BASIC_ATOM_TYPES   = {"C_sp":["CZ","CY"],
-                      "C_sp2":["C4","C5","C ","CA","CB","CC","CD","CK","CP","CM","CS","CN","CQ","CR","CV","CW","C*","CI"],
-                      "C_sp3":["CX","CT"],
-                      "N_sp":["NY"],
-                      "N_sp2":["N ","NA","NB","NC","N2","N*"],
-                      "N_sp3":["N3","NT"],
-                      "O_sb":["OW","OH","OS"],
-                      "O_db":["OP","O2","O "],
-                      "H":["HW","H4","H5","HA","HC","H1","H2","H3","HP","HZ","H ","HO","HS"],
-                      "F":["F "],
-                      "Cl":["Cl"],
-                      "Br":["Br"],
-                      "I":["I "],
-                      "S":["S ","SH","SO","SS"],
-                      "P":["P "],
+BASIC_ATOM_TYPES   = {"C_sp":["CZ","CY","cg","ch","c1"],
+                      "C_sp2":["C4","C5","C ","CA","CB","CC","CD","CK","CP","CM","CS","CN","CQ","CR","CV","CW","C*","CI","Ck","Cj","cC","cB","c ","ce","cf","ca"],
+                      "C_sp3":["CX","CT","cA","cD","cP","cR","Cg","Cy","2C","3C","Cp","cx","cy"],
+                      "N_sp":["NY","n1","no"],
+                      "N_sp2":["N ","NA","NB","NC","N2","N*","nN","Ng","nb","nc","nd","n ","ni","nj","ne","nf","n2"],
+                      "N_sp3":["N3","NT","nA","n4","nk","nl","np","n3","nq","nh","nm","nn","na"],
+                      "O_sb":["OW","OH","OS","oH","oR","oS","oT","Os","Oy","Oh","ow","oh","os","oq"],
+                      "O_db":["OP","O2","O ","oC","oO","oP","o "],
+                      "H":["HW","H4","H5","HA","HC","H1","H2","H3","HP","HZ","H ","HO","HS","hA","hL","hE","hS","hX","hB","hN","hO","hR","Hc","Hp","Ha","Ho","hc","h1","h2","h3","hx","ha","h4","h5","hn","ho","hs","hw","hp"],
+                      "F":["F ","f "],
+                      "Cl":["Cl","cl","CL"],
+                      "Br":["Br","br","BR"],
+                      "I":["I ","i "],
+                      "S":["S ","SH","SO","SS","Sm","SF","S*","s ","s2","s4","s6","sh","ss","sp","sq","sx","sy"],
+                      "P":["P ","pA","p2","p3","p4","p5","pb","pc","pd","pe","pf","px","py"],
                       "EP":["EP"]
                      }
-
 
 BOND_LENGTH_DICT = { 'H-O_sb':0.970, 'C_sp2-H':1.120, 'C_sp3-H':1.120, 
                      'C_sp-H':1.120, 'H-N_sp2':1.010, 'H-N_sp3':1.010, 
@@ -31,8 +30,7 @@ BOND_LENGTH_DICT = { 'H-O_sb':0.970, 'C_sp2-H':1.120, 'C_sp3-H':1.120,
                      'C_sp3-Cl':1.766,'C_sp2-Cl':1.766, 'C_sp3-I':2.166, 
                      'C_sp2-I':2.166, 'Br-C_sp3':1.944, 'Br-C_sp2':1.944, 
                      'EP-O_db':0.200, 'EP-O_sb':0.200, 'EP-N_sp3':0.200,
-                     'EP-N_sp2':0.200, 'EP-S':0.700
-                    }
+                     'EP-N_sp2':0.200, 'EP-S':0.700}
 
 BOND_FORCE_CONST_DICT = {'H-O_sb':553.0, 'C_sp2-H':367, 'C_sp3-H':340, 
                          'C_sp-H':400, 'H-N_sp2':434, 'H-N_sp3':434, 
