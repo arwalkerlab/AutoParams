@@ -1,11 +1,10 @@
-source leaprc.GLYCAM_06j-1
-source leaprc.protein.ff14SB
+source leaprc.RNA.OL3
 source leaprc.water.tip3p
-UNK = loadmol2 /home/mark/FlaskApps/Psi4AutoParams/Application/uploads/305d1803d3194a84839a544be98aca3b/test.mol2
-loadamberparams /home/mark/FlaskApps/Psi4AutoParams/Application/uploads/305d1803d3194a84839a544be98aca3b/test.frcmod
-test = loadpdb /home/mark/FlaskApps/Psi4AutoParams/Application/uploads/305d1803d3194a84839a544be98aca3b/test.pdb
+UNK = loadmol2 /mnt/WalkerLabsAutomatedParameterBuilder/TeraChemAutoParams/Application/uploads/52017dff2cd94ba5a6f23252375da24d/rA2_C_PDAPA.mol2
+loadamberparams /mnt/WalkerLabsAutomatedParameterBuilder/TeraChemAutoParams/Application/uploads/52017dff2cd94ba5a6f23252375da24d/rA2_C_PDAPA.frcmod
+test = loadpdb /mnt/WalkerLabsAutomatedParameterBuilder/TeraChemAutoParams/Application/uploads/52017dff2cd94ba5a6f23252375da24d/rA2_C_PDAPA.pdb
 addions test Na+ 0
 addions test Cl- 0
 solvatebox test TIP3PBOX 12.0
-saveamberparm test /home/mark/FlaskApps/Psi4AutoParams/Application/uploads/305d1803d3194a84839a544be98aca3b/test.prmtop /home/mark/FlaskApps/Psi4AutoParams/Application/uploads/305d1803d3194a84839a544be98aca3b/test.inpcrd
+saveamberparm test /mnt/WalkerLabsAutomatedParameterBuilder/TeraChemAutoParams/Application/uploads/52017dff2cd94ba5a6f23252375da24d/rA2_C_PDAPA.prmtop /mnt/WalkerLabsAutomatedParameterBuilder/TeraChemAutoParams/Application/uploads/52017dff2cd94ba5a6f23252375da24d/rA2_C_PDAPA.inpcrd
 quit

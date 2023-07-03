@@ -4,13 +4,13 @@ from .pdbclean import *
 
 ### Optimizer ###
 # from .optimize import *
-# from ._OPT.Psi4 import OptimizePDB
-from ._OPT.TeraChem import OptimizePDB
+from ._OPT.Psi4 import OptimizePDB
+# from ._OPT.TeraChem import OptimizePDB
 
 ### RESP Fitting ###
 # from .respfitting import *
-# from ._RESP.Psi4 import GetRESPCharges
-from ._RESP.TeraChem import GetRESPCharges
+from ._RESP.Psi4 import GetRESPCharges
+# from ._RESP.TeraChem import GetRESPCharges
 
 from .chemdraw import *
 from .parametrize import *
