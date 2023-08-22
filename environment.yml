@@ -1,12 +1,15 @@
-name: tc-autoparams-flask
+name: autoparams
 channels:
   - conda-forge
+  - psi4
 dependencies:
-  - python=3.8
-  - numpy
-  - rdkit
-  - openbabel
+  - python=3.9
+  - qcelemental=0.25.1
+  - psiresp-base=0.4.2
+  - numpy=1.21.2
+  - rdkit=2020.09.1
+  - openbabel=3.1.1
   - flask
   - werkzeug
   - ambertools
-  - parmed
+  - psi4=1.4
