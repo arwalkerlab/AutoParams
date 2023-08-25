@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/623450123.svg)](https://zenodo.org/badge/latestdoi/623450123)
 
-This repository contains the necessary files to build and deploy a Docker container which provides a web-based generator for forcefield parameters to be used in classical molecular dynamics.
+This repository contains the necessary files to build and deploy a web-based generator for forcefield parameters to be used in classical molecular dynamics.
 
 The current (public) implementation uses entirely open source engines on the back end.
 
