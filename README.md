@@ -26,8 +26,7 @@ The construction of the `.mol2` file is performed by `antechamber` in the AmberT
 
 #### Polymer Connections
 Many molecule types include connections to adjacent residues in a larger polymer, such as with amino acids in proteins or nucleotides in nucleic acid sequences.
-The webserver defaults to "NONE" for these connections, however users may specify atom names in their submitted PDB which correspond to connections with the previous residue (Head Atom) or following residue (Tail Atom) in sequence.  
-Please note that this requires all atoms to have unique names before submission.
+The webserver defaults to "NONE" for these connections, however users may specify atom names in their submitted PDB which correspond to connections with the previous residue (Head Atom) or following residue (Tail Atom) in sequence. Please note that this requires all atoms to have unique names before submission.
 
 ## Installation Instructions
 After downloading this repository to your location of choice, ensure all python packages listed in the `environment.yml` file are installed.  
