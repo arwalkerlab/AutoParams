@@ -24,7 +24,31 @@ The calculation of RESP charges in the current implementation uses [PsiRESP]<htt
 #### Mol2 Generation
 The construction of the `.mol2` file is performed by `antechamber` in the AmberTools suite.  However, to reduce reliance on external tools that may change in the future, work is ongoing to create a self-contained `.mol2` generator that can achieve the same results.
 
+## Installation Instructions
+After downloading this repository to your location of choice, ensure all python packages listed in the `environment.yml` file are installed.  
+Users who prefer to use `conda` installations can create a new environment from this file with 
+```
+conda create -f environment.yml
+```
+which will be named `autoparams`
 
+## Usage - Batch Mode
+To use batch mode (command line only), ensure that `bin/AutoParamsBatchMode.py` is accessible in your `$PATH`.
 
-#### TO DO LIST
-working on adding new parameters to library if unknown
+## Usage - WebServer Mode
+To deploy the browser-based UI version for access on your local machine only:
+```
+cd Application/
+flask run --port=5000
+```
+
+To deploy for external access, such as on a small academic network:
+```
+cd Application/
+flask run --host=0.0.0.0 --port=5000
+```
+
+#### TO DO LIST - Planned Features
+- Set up conda installation method
+- Create Docker Image for easy setup and rapid deployment
+- Additional module options for other QM packages.
