@@ -9,6 +9,8 @@ STATIC_DIR = MAIN_DIR+'/static/'
 DATABASE_DIR = MAIN_DIR+'/database/'
 TEMPLATES_DIR = MAIN_DIR+'/templates/'
 LOGFILES_DIR = TEMPLATES_DIR+'logfiles/'
+os.makedirs(DATABASE_DIR,exist_ok=True)
+os.makedirs(UPLOAD_FOLDER,exist_ok=True)
 os.makedirs(LOGFILES_DIR,exist_ok=True)
 
 # Extension variables
