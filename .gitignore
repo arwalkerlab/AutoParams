@@ -5,3 +5,5 @@ Application/uploads/
 Application/static/
 Application/templates/logfiles/
 Application/tleap.in
+Application/timer.dat
+Application/leap.log

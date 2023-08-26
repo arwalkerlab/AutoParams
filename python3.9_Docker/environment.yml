@@ -3,10 +3,11 @@ channels:
   - conda-forge
   - psi4
 dependencies:
-  - python=3.8
+  - python=3.9
   - psi4
   - psiresp-base
   - rdkit
   - openbabel
   - flask
   - ambertools
+  - parmed

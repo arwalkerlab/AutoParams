@@ -1,9 +1,12 @@
 ### STATIC VARIABLES ONLY ###
 import os
+import sys
+
 # Location variables
 parent = os.path.dirname
 MAIN_DIR = parent(parent(__file__))
-print(MAIN_DIR)
+BIN_DIR = os.path.join(parent(MAIN_DIR),"bin/")
+sys.path.append(BIN_DIR)
 UPLOAD_FOLDER = MAIN_DIR+'/uploads/'
 STATIC_DIR = MAIN_DIR+'/static/'
 DATABASE_DIR = MAIN_DIR+'/database/'
