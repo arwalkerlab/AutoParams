@@ -43,16 +43,24 @@ To use batch mode (command line only), ensure that `bin/AutoParamsBatchMode.py` 
 To deploy the browser-based UI version for access on your local machine only:
 ```
 cd Application/
-flask run --port=5000
+flask run --port=8080
 ```
 
 To deploy for external access, such as on a small academic network:
 ```
 cd Application/
-flask run --host=0.0.0.0 --port=5000
+flask run --host=0.0.0.0 --port=8080
 ```
+
+## Usage - Docker Container
+For rapid deployment and ease of setup, we have also built several Docker images which are available on [DockerHub](https://hub.docker.com/repository/docker/markahix/auto-params/general).
+Current builds are available for Python versions 3.8, 3.9, and 3.10.
+With Docker installed, the user may retrieve and deploy the image as a container on their local machine.
+```
+docker run --name autoparams -p 8080:5310 markahix/auto-params:psi4-python3.10
+```
+In a web browser, the container may be accessed at localhost:8080 or 127.0.0.1:8080
 
 #### TO DO LIST - Planned Features
 - Set up conda installation method
-- Create Docker Image for easy setup and rapid deployment
 - Additional module options for other QM packages.
