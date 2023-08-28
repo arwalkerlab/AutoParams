@@ -59,7 +59,7 @@ With Docker installed, the user may retrieve and deploy the image as a container
 ```
 docker run --name autoparams -p 8080:5310 markahix/auto-params:psi4-python3.10
 ```
-In a web browser, the container may be accessed at localhost:8080 or 127.0.0.1:8080
+In a web browser, the container may be accessed at `localhost:8080` or `127.0.0.1:8080`
 
 #### TO DO LIST - Planned Features
 - Set up conda installation method
