@@ -1,0 +1,13 @@
+name: autoparams
+channels:
+  - conda-forge
+  - psi4
+dependencies:
+  - python=3.10
+  - psi4
+  - psiresp-base
+  - rdkit
+  - openbabel
+  - flask
+  - ambertools
+  - parmed
