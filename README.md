@@ -64,3 +64,4 @@ In a web browser, the container may be accessed at `localhost:8080` or `127.0.0.
 #### TO DO LIST - Planned Features
 - Set up conda installation method
 - Additional module options for other QM packages.
+- Add automatic monomer subunit capping.
