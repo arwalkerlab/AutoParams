@@ -2,6 +2,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template, ses
 from werkzeug.utils import secure_filename
 from glob import glob as G
 import os
+import time
 import subprocess as S
 import uuid
 import parmed
@@ -42,6 +43,7 @@ def RefreshDB():
         all_db_folders.sort(key=lambda x: os.path.getmtime(x))
         for file_loc in all_db_folders:
             f.write(DataBaseEntry(file_loc))
+    CleanUploadsFolder()
     os.chdir(MAIN_DIR)
 
 def DataBaseEntry(location):
@@ -99,3 +101,14 @@ def MaybeCopy(source,dest):
 
 def FileExists(filepath):
     return os.path.exists(filepath)
+
+def CleanUploadsFolder():
+    def file_age_in_days(filename):
+        st = os.stat(filename)
+        age_in_seconds = (time.time() - st.st_mtime)
+        return int(age_in_seconds/86400)
+    os.chdir(MAIN_DIR+'/uploads/')
+    for directory in G("*/"):
+        if file_age_in_days(directory) > 6:
+            S.call(f"rm -r {directory}",shell=True)
+        
