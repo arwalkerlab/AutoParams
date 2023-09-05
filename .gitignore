@@ -7,3 +7,4 @@ Application/templates/logfiles/
 Application/tleap.in
 Application/timer.dat
 Application/leap.log
+BuildAllDockers.sh

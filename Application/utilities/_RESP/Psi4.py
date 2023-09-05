@@ -13,10 +13,11 @@ def GetRESPCharges(pdbfile,charge,mult,jobfolder,level_of_theory="b3lyp",basis_s
     os.chdir(jobfolder+"/single_point/")
     S.call("sh run_single_point.sh",shell=True)
     os.chdir(currdir)
-    if cap_atoms == []:
-        S.call(f"{BIN_DIR}PsiRESPJob -p {pdbfile} -c {charge} -m {mult} -d {jobfolder}",shell=True)
-    else:
-        S.call(f"{BIN_DIR}PsiRESPJob -p {pdbfile} -c {charge} -m {mult} -d {jobfolder} -z {' '.join(x for x in cap_atoms)}",shell=True)
+    psi_call = f"{BIN_DIR}PsiRESPJob -p {pdbfile} -c {charge} -m {mult} -d {jobfolder} "
+    if cap_atoms != []:
+        psi_call += f"-z {' '.join(x for x in cap_atoms)} "
+    psi_call += " >> /app/PsiRESP.out "
+    S.call(psi_call,shell=True)
     if not G("resp.out"):
         return False
     for line in open("resp.out","r").readlines():

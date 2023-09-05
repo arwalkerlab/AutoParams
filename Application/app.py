@@ -28,7 +28,10 @@ def start_page():
         headconnect = request.form.get('headconnect')
         tailconnect = request.form.get('tailconnect')
         cap_atoms = request.form.get('capatoms')
-        cap_atoms = [x.strip() for x in cap_atoms.split(",")]
+        if cap_atoms != "NONE":
+            cap_atoms = [x.strip() for x in cap_atoms.split(",")]
+        else:
+            cap_atoms = []
         connections = []
         if headconnect == "NONE":
             connections.append("0")
@@ -75,22 +78,29 @@ def start_page():
 def process_files():
     continue_job = CURRENT_JOBS[session["jobid"]].CheckPDBQuality()
     if not continue_job:
+        CURRENT_JOBS[session["jobid"]].LogJobMessage("PDB of insufficient quality.")
         return "Error Encountered."
     continue_job = CURRENT_JOBS[session["jobid"]].Optimize()
     if not continue_job:
+        CURRENT_JOBS[session["jobid"]].LogJobMessage("Unable to optimize structure.")
         return "Error Encountered."
     continue_job = CURRENT_JOBS[session["jobid"]].RESPCharges()
     if not continue_job:
+        CURRENT_JOBS[session["jobid"]].LogJobMessage("Unable to generate RESP charges.")
         return "Error Encountered."
     continue_job = CURRENT_JOBS[session["jobid"]].Parametrize()
     if not continue_job:
+        CURRENT_JOBS[session["jobid"]].LogJobMessage("Unable to generate parameters.")
         return "Error Encountered."
     continue_job = CURRENT_JOBS[session["jobid"]].TestParams()
     if not continue_job:
+        CURRENT_JOBS[session["jobid"]].LogJobMessage("Unable to successfully test parameters.")
         return "Error Encountered."
     continue_job = CURRENT_JOBS[session["jobid"]].AddResultsToDB()
     if not continue_job:
+        CURRENT_JOBS[session["jobid"]].LogJobMessage("Unable to add parameters to database.")
         return "Error Encountered."
+    CURRENT_JOBS[session["jobid"]].LogJobMessage("Parametrization Complete!")
     return "Files Processed"
 
 ### Job Finished Page
