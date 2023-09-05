@@ -27,6 +27,8 @@ def start_page():
         basis_set = request.form.get('basis_set')
         headconnect = request.form.get('headconnect')
         tailconnect = request.form.get('tailconnect')
+        cap_atoms = request.form.get('capatoms')
+        cap_atoms = [x.strip() for x in cap_atoms.split(",")]
         connections = []
         if headconnect == "NONE":
             connections.append("0")
@@ -37,7 +39,7 @@ def start_page():
         else:
             connections.append(tailconnect)
         ### Initialize Job
-        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool,level_of_theory,basis_set,connections)
+        CURRENT_JOBS[jobid] = MainJob(jobid,charge,multiplicity,restype,optimize_bool,override_db_bool,level_of_theory,basis_set,connections,cap_atoms)
 
         ### Upload PDB and begin processing.
         continue_job = CURRENT_JOBS[jobid].UploadPDBFile(pdbfile)

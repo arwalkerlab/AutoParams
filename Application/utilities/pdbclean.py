@@ -74,4 +74,11 @@ def GetResName(pdb):
         if "ATOM" in line:
             return line[17:20].strip()
 
-        
+def RemoveCaps(pdbfile,cap_atoms):
+    pdb = parmed.load_file(pdbfile)
+    pdb.save("CAPPED_"+pdbfile)
+    uncapped = parmed.Structure()
+    for atom in pdb.atoms:
+        if atom.name.strip() not in cap_atoms:
+            uncapped.add_atom(atom,atom.residue.name,atom.residue.number)
+    uncapped.save(pdbfile,overwrite=True)

@@ -47,7 +47,7 @@ def readRESPcharges(filename):
             charges.append(str(charge))
     return charges
 
-def GetRESPCharges(pdbfile,charge,mult,jobfolder,level_of_theory="b3lyp",basis_set="6-31gss"):
+def GetRESPCharges(pdbfile,charge,mult,jobfolder,level_of_theory="b3lyp",basis_set="6-31gss",cap_atoms=[]):
     ## Terachem Version
     currdir = os.getcwd()
     os.chdir(jobfolder)

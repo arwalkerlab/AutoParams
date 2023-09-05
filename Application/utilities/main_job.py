@@ -17,7 +17,7 @@ from .parametrize import *
 from .testing import *
 
 class MainJob():
-    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool,level_of_theory,basis_set,connections):
+    def __init__(self,jobid,charge,multiplicity,restype,opt_bool,db_override_bool,level_of_theory,basis_set,connections,cap_atoms):
         ### Internal variables.
         self._job_id = jobid
         self._charge = charge
@@ -29,6 +29,7 @@ class MainJob():
         self._level_of_theory = level_of_theory
         self._basis_set = basis_set
         self._connections = connections
+        self._cap_atoms = cap_atoms
 
         ### Folder Heirarchy
         self._job_folder = UPLOAD_FOLDER + str(self._job_id)+ "/"
@@ -112,12 +113,15 @@ class MainJob():
         return True
 
     def RESPCharges(self):
-        self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder,level_of_theory=self._level_of_theory,basis_set=self._basis_set)
+        self._resp_charges = GetRESPCharges(self.file_list["Working PDB"], self._charge, self._multiplicity, self._job_folder,level_of_theory=self._level_of_theory,basis_set=self._basis_set,cap_atoms=self._cap_atoms)
         if not self._resp_charges:
             self.LogJobMessage("Unable to generate RESP charges.")
             self.LogJobMessage("<hr>")
             MaybeCopy(self.file_list['JobLog'],f"{TEMPLATES_DIR}logfiles/")
             return False
+        ## remove cap atoms from PDB before continuing...
+        if self._cap_atoms != []:
+            RemoveCaps(self.file_list["Working PDB"],self._cap_atoms)
         return True
 
     def Parametrize(self):
