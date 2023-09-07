@@ -4,8 +4,8 @@ from .frcmod import *
 from .utilities import *
 from .testing import *
 
-def GenerateParameters(file_list,respcharges,moltype,resname,connections=[]):
-    MAKE_MOL2_FILE(file_list["Working PDB"],file_list["MOL2"],respcharges,connections)
+def GenerateParameters(file_list,respcharges,moltype,resname,connections=[],cap_atoms=[]):
+    MAKE_MOL2_FILE(file_list["Working PDB"],file_list["MOL2"],respcharges,connections,cap_atoms)
     if moltype == "Carbohydrate":
         #do glycam stuff
         RewriteMol2Glycam(file_list["MOL2"],file_list["Working PDB"])

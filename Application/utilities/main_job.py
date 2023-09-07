@@ -128,7 +128,7 @@ class MainJob():
         os.makedirs(self._params_dir,exist_ok=True)
         S.call(f"cp {self.file_list['Working PDB']} {self._params_dir}/param.pdb",shell=True)
         os.chdir(self._params_dir)
-        GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname,self._connections)
+        GenerateParameters(self.file_list,self._resp_charges,self._restype,self._resname,self._connections,self._cap_atoms)
         os.chdir(MAIN_DIR)
         if all([G(self.file_list["FRCMOD"]),G(self.file_list['MOL2'])]):
             S.call(f"rm -rf {self._params_dir}",shell=True)

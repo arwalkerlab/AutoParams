@@ -1,16 +1,16 @@
 from ..utilities import *
 from .glycam_atom_types import *
 
-def MAKE_MOL2_FILE(pdbfile,mol2file,respcharges,connections):
+def MAKE_MOL2_FILE(pdbfile,mol2file,respcharges,connections,cap_atoms):
     ### Generate the mol2 file.
     GenerateMol2File(pdbfile,mol2file)
     ### Update the mol2 file with resp charges.
-    writeMol2(respcharges, mol2file,connections)
+    writeMol2(respcharges, mol2file,connections,cap_atoms)
 
 def GenerateMol2File(pdbfile,mol2file):
     S.call(f"antechamber -i {pdbfile} -fi pdb -at amber -o {mol2file} -fo mol2 -pf y 1> antechamber.log 2> antechamber.err",shell=True)
 
-def writeMol2(charges, filename,connections):
+def writeMol2(charges, filename,connections,cap_atoms):
     lines = open(filename, 'r').readlines()
     i = 0
     start = 0
@@ -22,7 +22,7 @@ def writeMol2(charges, filename,connections):
             end = i
             break
         i = i + 1
-    if end - start != len(charges):
+    if end - start != len(charges)-len(cap_atoms):
         raise RuntimeError("Size of molecule in mol2 file differs from size of molecule in tcout file")
     with open("temp.txt", 'w') as w:
         for line in lines[:start]:

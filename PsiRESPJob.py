@@ -31,11 +31,13 @@ def RunJob(pdbfile,charge,mult,workdir,cap_atoms):
     psi_molecule = psiresp.Molecule(qcmol=qc_molecule,charge=charge,multiplicity=mult)
     print("psi_molecule_generated")
     psi_molecule.add_conformer(qcmol=qc_molecule)
+    cap_indices = []
     if cap_atoms != []:
         print("Adding cap atom charge restraints")
         constraints = psiresp.ChargeConstraintOptions()
         print("added contraints to system")
-        constraints.add_charge_sum_constraint_for_molecule(psi_molecule, charge=0, indices=GetCapAtomIndices(pdbfile,cap_atoms))
+        cap_indices = GetCapAtomIndices(pdbfile,cap_atoms)
+        constraints.add_charge_sum_constraint_for_molecule(psi_molecule, charge=0, indices=cap_indices)
         print("added charge constraint to specified atoms.")
 
     psi_job = psiresp.Job(molecules=[psi_molecule],working_directory=workdir)
@@ -44,7 +46,9 @@ def RunJob(pdbfile,charge,mult,workdir,cap_atoms):
     print("Obtaining RESP charges from psi4 job...")
     respcharges = psi_job.run()
     with open("resp.out","w") as f:
-        for ch in respcharges[0]:
+        for i,ch in enumerate(respcharges[0]):
+            if i in cap_atoms:
+                continue
             f.write(f"{ch}\n")
     print("Job complete!")
 
