@@ -28,6 +28,8 @@ The construction of the `.mol2` file is performed by `antechamber` in the AmberT
 Many molecule types include connections to adjacent residues in a larger polymer, such as with amino acids in proteins or nucleotides in nucleic acid sequences.
 The webserver defaults to "NONE" for these connections, however users may specify atom names in their submitted PDB which correspond to connections with the previous residue (Head Atom) or following residue (Tail Atom) in sequence. Please note that this requires all atoms to have unique names before submission.
 
+For users who prefer to include methyl caps in their monomer subunits, a field is included to provide these atom names in a comma-separated list.  RESP calculations using PsiRESP will automatically constrain the charge of these caps to zero, which will ensure their subsequent removal for use in polymer chains will maintain integer charges only.  Additionally, the generation of mol2 and frcmod files after RESP calculations will automatically omit these caps.
+
 ## Installation Instructions
 After downloading this repository to your location of choice, ensure all python packages listed in the `environment.yml` file are installed.  
 Users who prefer to use `conda` installations can create a new environment from this file with 
