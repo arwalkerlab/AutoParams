@@ -33,12 +33,13 @@ def PDBisTooBig(pdbfile):
 
 def SingleResidue(pdbfile):
     subprocess.call(f"cp {pdbfile} {pdbfile}.ORIG",shell=True)
+    PDBUniqueAtomNames(pdbfile)
     lines = open(pdbfile).readlines()
     # unique_atom_names = []
     get_res_info = True
     # element_count = {}
     atomcounts=0
-    PDBUniqueAtomNames(pdbfile)
+    
     for i,line in enumerate(lines):
         if any(["ATOM" in line,"HETATM" in line]):
             atomcounts +=1
