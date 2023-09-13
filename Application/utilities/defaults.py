@@ -1,6 +1,7 @@
 ### STATIC VARIABLES ONLY ###
 import os
 import sys
+import subprocess as S
 
 # Location variables
 parent = os.path.dirname
