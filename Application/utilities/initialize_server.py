@@ -1,6 +1,8 @@
 from utilities.utilities import *
 
 def InitializeApp(app):
+    global USE_TERACHEM
+    global MAIN_UPLOAD_FOLDER
     app.config['SECRET_KEY'] = "01123581321_Dockerized"
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['DATABASE_FOLDER'] = DATABASE_DIR
