@@ -34,3 +34,6 @@ LEAPRC_DICT = {"DNA":"source leaprc.DNA.OL15\n",
                "RNA":"source leaprc.RNA.OL3\n",
                "Protein":"source leaprc.protein.ff14SB\n",
                "Carbohydrate":"source leaprc.GLYCAM_06j-1\n"}
+
+# TeraChem Variables.
+USE_TERACHEM = False
