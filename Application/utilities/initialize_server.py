@@ -10,13 +10,4 @@ def InitializeApp(app):
     main_start_dir = os.getcwd()
     MAIN_UPLOAD_FOLDER = os.path.join(main_start_dir,"uploads/")
     ### Any other QM packages should have similar functions included here as they get added in.
-    USE_TERACHEM=IsTeraChemAvailable()
     RefreshDB()
-
-def IsTeraChemAvailable():
-    proc = S.Popen("which terachem",shell=True,stdout=S.PIPE,stderr=S.PIPE)
-    out,err = proc.communicate()
-    output = out.decode('utf-8')
-    if output == '':
-        return False
-    return True

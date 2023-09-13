@@ -36,4 +36,12 @@ LEAPRC_DICT = {"DNA":"source leaprc.DNA.OL15\n",
                "Carbohydrate":"source leaprc.GLYCAM_06j-1\n"}
 
 # TeraChem Variables.
-USE_TERACHEM = False
+def IsTeraChemAvailable():
+    proc = S.Popen("which terachem",shell=True,stdout=S.PIPE,stderr=S.PIPE)
+    out,err = proc.communicate()
+    output = out.decode('utf-8')
+    if output == '':
+        return False
+    return True
+
+USE_TERACHEM=IsTeraChemAvailable()
