@@ -17,7 +17,6 @@ RUN conda install -n autoparams -y python=3.9
 RUN conda install -n autoparams -y -c psi4 psi4
 RUN conda install -n autoparams -y -c conda-forge psiresp-base
 RUN conda install -n autoparams -y -c conda-forge rdkit
-RUN conda install -n autoparams -y -c conda-forge openbabel
 RUN conda install -n autoparams -y -c conda-forge flask
 RUN conda install -n autoparams -y -c conda-forge ambertools
 RUN conda install -n autoparams -y -c conda-forge parmed
