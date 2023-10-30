@@ -63,6 +63,14 @@ docker run --name autoparams -p 8080:5310 markahix/auto-params:psi4-python3.10
 ```
 In a web browser, the container may be accessed at `localhost:8080` or `127.0.0.1:8080`
 
+## Citation
+If you use AutoParams, please cite the following paper in addition to the respective publications for your chosen QM package.
+
+AutoParams: An Automated Web-Based Tool To Generate Force Field Parameters for Molecular Dynamics Simulations \
+Mark A. Hix and Alice R. Walker \
+Journal of Chemical Information and Modeling **2023** *63* (20), 6293-6301 \
+DOI: [10.1021/acs.jcim.3c01049](http://doi.org/10.1021/acs.jcim.3c01049)
+
 #### TO DO LIST - Planned Features
 - Set up conda installation method
 - Additional module options for other QM packages.
