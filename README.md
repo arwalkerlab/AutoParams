@@ -71,6 +71,9 @@ Mark A. Hix and Alice R. Walker \
 Journal of Chemical Information and Modeling **2023** *63* (20), 6293-6301 \
 DOI: [10.1021/acs.jcim.3c01049](http://doi.org/10.1021/acs.jcim.3c01049)
 
+# DEVELOPMENT BRANCH 
+For those wishing to contribute to the codebase, please fork from the [Development Repository](https://github.com/arwalkerlab/AutoParams-development) and submit pull requests there.  Stable releases will be periodically merged from there after testing of any and all new features.
+
 #### TO DO LIST - Planned Features
 - Set up conda installation method
 - Additional module options for other QM packages.
