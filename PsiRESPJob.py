@@ -45,7 +45,7 @@ def RunJob(pdbfile,charge,mult,workdir,cap_atoms):
     psi_job.run() ## MUST HAVE BOTH INSTANCES OF psi_job.run() TO FUNCTION CORRECTLY.
     print("Obtaining RESP charges from psi4 job...")
     respcharges = psi_job.run()
-    with open("resp.out","w") as f:
+    with open(workdir+"resp.out","w") as f:
         for i,ch in enumerate(respcharges[0]):
             if i in cap_atoms:
                 continue
