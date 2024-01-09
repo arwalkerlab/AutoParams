@@ -12,16 +12,14 @@ def GenerateMol2File(pdbfile,mol2file):
 
 def writeMol2(charges, filename,connections,cap_atoms):
     lines = open(filename, 'r').readlines()
-    i = 0
     start = 0
     end = 0
-    for line in lines:
+    for i,line in enumerate(lines):
         if "@<TRIPOS>ATOM" in line:
             start = i + 1
         if "@<TRIPOS>BOND" in line:
             end = i
             break
-        i = i + 1
     if end - start != len(charges)-len(cap_atoms):
         raise RuntimeError("Size of molecule in mol2 file differs from size of molecule in tcout file")
     with open("temp.txt", 'w') as w:

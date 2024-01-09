@@ -1,12 +1,12 @@
 #!/bin/bash
 ########### Variables ###########
 # Name of the image (instead of the hash of numbers and letters)
-IMAGENAME=markahix/auto-params:psi4-python3.8
+IMAGENAME=markahix/auto-params:psi4-python3.10
 # Name for the resulting container to be generated.
 CONTAINERNAME=AutoParametrizer
 # Port assignment from inside the docker container to the host system. 
-HOST_PORT=5000
-DOCKER_PORT=5005
+HOST_PORT=8088
+DOCKER_PORT=5310
 DOCKER_PORT_MAPPING="-p $HOST_PORT:$DOCKER_PORT"
 
 # External Directory mounted inside Container
@@ -26,14 +26,14 @@ docker build --tag $IMAGENAME .
 
 
 ###### Interactive Container ######
-docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
+# docker run -it $DOCKER_MOUNT_COMMAND $IMAGENAME
 
 ###### Stand-alone Container ######
-# docker run --network=host --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
+docker run --network=host --name $CONTAINERNAME $DOCKER_MOUNT_COMMAND $DOCKER_PORT_MAPPING $DOCKER_RUN_FLAGS $IMAGENAME
 
 #### Cleanup on container exit ####
 # Purge the container
-docker rm -f $(docker ps -aq)
+#docker rm -f $(docker ps -aq)
 
 # Purge the image
-docker image rm -f $(docker images -aq)
+#docker image rm -f $(docker images -aq)

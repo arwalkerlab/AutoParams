@@ -31,9 +31,6 @@ RUN chmod +x /bin/PsiRESPJob
 # Move into /app/ where Flask Application is now located.
 WORKDIR /app/
 
-# Publish ports
-EXPOSE 5310
-
 # On container initialization, run the flask app, exposed
 ENTRYPOINT ["conda", "run", "-n", "autoparams", "flask", "run","--host=0.0.0.0","--port=5310"]
 # CMD ["conda", "run", "-n", "autoparams", "flask", "run","--host=0.0.0.0","--port=5380"]
