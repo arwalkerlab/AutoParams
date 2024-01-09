@@ -16,10 +16,10 @@ def GetRESPCharges(pdbfile,charge,mult,jobfolder,level_of_theory="b3lyp",basis_s
     psi_call = f"{BIN_DIR}PsiRESPJob -p {pdbfile} -c {charge} -m {mult} -d {jobfolder} "
     if cap_atoms != []:
         psi_call += f"-z {' '.join(x for x in cap_atoms)} "
-    psi_call += " >> /app/PsiRESP.out "
+    psi_call += f" >> {jobfolder}/PsiRESP.out "
     S.call(psi_call,shell=True)
-    if not G("resp.out"):
+    if not G(f"{jobfolder}/PsiRESP.out"):
         return False
-    for line in open("resp.out","r").readlines():
+    for line in open(f"{jobfolder}/PsiRESP.out","r").readlines():
         resp_charges.append(line.strip())
     return resp_charges
